@@ -1,6 +1,8 @@
 package fr.unice.polytech.ihmandroid.model;
 
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class Store {
 
@@ -11,7 +13,7 @@ public class Store {
     private String adress;
     private String cityNumber;
     private String imageURL;
-
+    private List<Product> inventory;
 
     /**
      * Constructor for a Store
@@ -29,6 +31,7 @@ public class Store {
         this.adress = adress;
         this.cityNumber = cityNumber;
         this.imageURL = imageURL;
+        inventory = new ArrayList<>();
     }
 
 
@@ -43,4 +46,14 @@ public class Store {
     public String getImageURL() {
         return imageURL;
     }
+
+
+    public void addProduct(Product product){
+        inventory.add(product);
+    }
+
+    public void addAllProduct(List<Product> products){
+        inventory.addAll(products);
+    }
+
 }

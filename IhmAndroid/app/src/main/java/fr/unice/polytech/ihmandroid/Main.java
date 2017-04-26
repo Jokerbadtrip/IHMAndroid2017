@@ -2,6 +2,8 @@ package fr.unice.polytech.ihmandroid;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -9,13 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import fr.unice.polytech.ihmandroid.adapter.ListViewAdapter;
-import fr.unice.polytech.ihmandroid.model.Store;
+import fr.unice.polytech.ihmandroid.fragment.ProductViewFragment;
+import fr.unice.polytech.ihmandroid.fragment.StoreViewFragment;
 
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -38,12 +36,9 @@ public class Main extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ListView listView = (ListView) findViewById(R.id.list_content);
-        List<Store> stores = new ArrayList<>();
-        stores.add(new Store("","name","Marseille","","",""));
-        stores.add(new Store("","nom","Lyon","","",""));
-        ListViewAdapter adapter = new ListViewAdapter(this, stores);
-        listView.setAdapter(adapter);
+        displayView(R.id.nav_stores);
+
+
 
 
     }
@@ -84,24 +79,50 @@ public class Main extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        displayView(item.getItemId());
+        return true;
+    }
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+    public void displayView(int itemId){
 
-        } else if (id == R.id.nav_manage) {
+        Fragment fragment = null;
+        String title = getString(R.string.app_name);
 
-        } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        if (itemId == R.id.nav_stores) {
+            fragment = StoreViewFragment.newInstance();
+            title  = "Magasins";
 
+        } else if (itemId == R.id.nav_products) {
+            fragment = ProductViewFragment.newInstance();
+            title = "Produits";
+        } else if (itemId == R.id.nav_offers) {
+
+        } else if (itemId == R.id.nav_account) {
+
+        } else if (itemId == R.id.nav_share) {
+
+        } else if (itemId == R.id.nav_send) {
+
+        }
+
+
+
+        if (fragment != null){
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
+        }
+
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().setTitle(title);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
+
+
     }
+
 }

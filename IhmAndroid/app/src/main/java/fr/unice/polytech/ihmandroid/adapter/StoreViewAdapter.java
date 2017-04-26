@@ -1,7 +1,6 @@
 package fr.unice.polytech.ihmandroid.adapter;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +18,12 @@ import fr.unice.polytech.ihmandroid.model.Store;
  * Created by MSI on 23/04/2017.
  */
 
-public class ListViewAdapter extends ArrayAdapter {
+public class StoreViewAdapter extends ArrayAdapter {
 
 
     private List<Store> stores;
 
-    public ListViewAdapter(@NonNull Context context, @NonNull List objects) {
+    public StoreViewAdapter(@NonNull Context context, @NonNull List objects) {
         super(context, 0, objects);
         this.stores = objects;
     }
@@ -36,7 +35,7 @@ public class ListViewAdapter extends ArrayAdapter {
         View view;
 
         if (convertView==null){
-            view = inflater.inflate(R.layout.list_view_tile, null);
+            view = inflater.inflate(R.layout.store_view_tile, null);
         }
         else{
             view = (View) convertView;
