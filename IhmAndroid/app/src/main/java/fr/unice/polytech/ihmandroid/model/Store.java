@@ -32,7 +32,15 @@ public class Store {
     }
 
 
+    public String getName() {
+        return name;
+    }
 
+    public String getCity() {
+        return city;
+    }
 
-
+    public String getImageURL() {
+        return imageURL;
+    }
 }
