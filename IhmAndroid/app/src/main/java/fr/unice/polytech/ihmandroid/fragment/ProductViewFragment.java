@@ -3,17 +3,16 @@ package fr.unice.polytech.ihmandroid.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.unice.polytech.ihmandroid.R;
-import fr.unice.polytech.ihmandroid.adapter.ProductViewAdapter;
+import fr.unice.polytech.ihmandroid.adapter.CategoryViewAdapter;
 import fr.unice.polytech.ihmandroid.model.Product;
 
 /**
@@ -23,8 +22,8 @@ import fr.unice.polytech.ihmandroid.model.Product;
 public class ProductViewFragment extends Fragment {
 
 
-    private ViewPager viewPager;
-    private ListView listView;
+
+    private GridView gridView;
 
     public ProductViewFragment() {
     }
@@ -47,15 +46,14 @@ public class ProductViewFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        viewPager = (ViewPager) getView().findViewById(R.id.slideshow_products);
-        listView = (ListView) getView().findViewById(R.id.list_categories);
+        gridView = (GridView) getView().findViewById(R.id.grid_categories);
 
         List<Product> products = new ArrayList<>();
-        products.add(new Product("","Produit1", "", 14.4, "description"));
-        products.add(new Product("","Produit2", "", 19.99, "description"));
+        products.add(new Product("","Produit1", "", "", 14.4, "description"));
+        products.add(new Product("","Produit2", "", "", 19.99, "description"));
 
-        ProductViewAdapter productAdapter = new ProductViewAdapter(this.getContext(), products);
-        listView.setAdapter(productAdapter);
+        CategoryViewAdapter categoryAdapter = new CategoryViewAdapter(this.getContext());
+        gridView.setAdapter(categoryAdapter);
 
 
 

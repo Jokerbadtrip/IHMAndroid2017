@@ -1,6 +1,7 @@
 package fr.unice.polytech.ihmandroid.adapter;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -47,6 +50,8 @@ public class StoreViewAdapter extends ArrayAdapter {
         TextView storeCity = (TextView) view.findViewById(R.id.store_city);
         storeName.setText(store.getName());
         storeCity.setText(store.getCity());
+        Glide.with(this.getContext()).load(store.getImageURL()).placeholder(R.mipmap.store_placeholder).into(storeImage);
+
 
         return view;
 

@@ -1,10 +1,13 @@
 package fr.unice.polytech.ihmandroid.model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Store {
+import fr.unice.polytech.ihmandroid.R;
+
+public class Store implements Serializable {
 
 
     private String id;
@@ -30,7 +33,13 @@ public class Store {
         this.city = city;
         this.adress = adress;
         this.cityNumber = cityNumber;
-        this.imageURL = imageURL;
+        if (imageURL==null || imageURL.equals("")){
+            this.imageURL = null;
+        }
+        else{
+            this.imageURL = imageURL;
+        }
+
         inventory = new ArrayList<>();
     }
 

@@ -6,21 +6,30 @@ package fr.unice.polytech.ihmandroid.model;
 
 public class Product {
 
-    String id;
-    String name;
-    String category;
-    double price;
-    String description;
-    boolean promoted = false;
-    boolean reduction = false;
+    private String id;
+    private String name;
+    private String category;
+    private String image;
+    private double price;
+    private String description;
+    private boolean promoted = false;
+    private boolean reduction = false;
 
 
-    public Product(String id, String name, String category, double price, String description) {
+    public Product(String id, String name, String category, String image, double price, String description) {
         this.id = id;
         this.name = name;
         this.category = category;
         this.price = price;
         this.description = description;
+
+        if (image==null || image.equals("")){
+            this.image="@drawable/product_placeholder";
+        }
+        else{
+            this.image=image;
+        }
+
     }
 
 
@@ -48,5 +57,9 @@ public class Product {
     public void setReduction(double percentage){
         reduction = true;
         price = price - price*percentage;
+    }
+
+    public String getImage() {
+        return image;
     }
 }

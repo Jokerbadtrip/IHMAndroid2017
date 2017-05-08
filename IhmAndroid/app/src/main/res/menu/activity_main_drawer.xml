@@ -3,9 +3,12 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_promoted"
+            android:title="Produits phares"/>
+        <item
             android:id="@+id/nav_stores"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Magasins" />
+            android:title="@string/navigation_stores" />
         <item
             android:id="@+id/nav_products"
             android:icon="@drawable/ic_menu_gallery"
@@ -18,18 +21,19 @@
             android:id="@+id/nav_account"
             android:icon="@drawable/ic_menu_manage"
             android:title="Mon compte" />
+
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/navigation_communicate">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="@string/navigation_share" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="@string/navigation_send" />
         </menu>
     </item>
 

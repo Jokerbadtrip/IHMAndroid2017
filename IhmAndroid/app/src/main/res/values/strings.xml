@@ -4,5 +4,11 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+
     <string name="action_settings">Settings</string>
+
+    <string name="navigation_stores">Magasins</string>
+    <string name="navigation_communicate">Communiquer</string>
+    <string name="navigation_share">Partager</string>
+    <string name="navigation_send">Envoyer</string>
 </resources>

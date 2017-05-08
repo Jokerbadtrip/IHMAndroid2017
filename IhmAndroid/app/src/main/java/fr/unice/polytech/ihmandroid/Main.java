@@ -13,10 +13,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import fr.unice.polytech.ihmandroid.fragment.ProductViewFragment;
+import fr.unice.polytech.ihmandroid.fragment.PromotedViewFragment;
 import fr.unice.polytech.ihmandroid.fragment.StoreViewFragment;
 
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    private boolean onAccount = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +42,14 @@ public class Main extends AppCompatActivity
 
         displayView(R.id.nav_stores);
 
+    }
 
 
-
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu){
+        super.onPrepareOptionsMenu(menu);
+        menu.findItem(R.id.action_tri).setVisible(!onAccount);
+        return true;
     }
 
     @Override
@@ -68,8 +77,8 @@ public class Main extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.sorting_by_city) {
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -99,7 +108,12 @@ public class Main extends AppCompatActivity
             title = "Produits";
         } else if (itemId == R.id.nav_offers) {
 
+
         } else if (itemId == R.id.nav_account) {
+
+        } else if (itemId == R.id.nav_promoted){
+            fragment = PromotedViewFragment.newInstance();
+            title = "Produits phares";
 
         } else if (itemId == R.id.nav_share) {
 

@@ -2,8 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_tri"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="Trier"
+        app:showAsAction="never" >
+        <menu xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
+            <item
+                android:id="@+id/sorting_by_city"
+                android:title="Trier par ville"
+                app:showAsAction="never"/>
+            <item
+                android:id="@+id/sorting_by_name"
+                android:title="Trier par nom"
+                app:showAsAction="never"/>
+        </menu>
+    </item>
 </menu>

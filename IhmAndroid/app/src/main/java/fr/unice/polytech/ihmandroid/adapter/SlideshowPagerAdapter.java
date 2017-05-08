@@ -4,6 +4,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.List;
+
+import fr.unice.polytech.ihmandroid.fragment.SlideshowTileFragment;
+import fr.unice.polytech.ihmandroid.model.Product;
+
 /**
  * Created by MSI on 26/04/2017.
  */
@@ -11,20 +16,21 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class SlideshowPagerAdapter extends FragmentPagerAdapter {
 
 
-    private int count;
+    private List<Product> products;
 
-    public SlideshowPagerAdapter(FragmentManager fm, int count) {
+    public SlideshowPagerAdapter(FragmentManager fm, List<Product> products) {
         super(fm);
-        this.count = count;
+        this.products=products;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return null;
+        Product product = products.get(position);
+        return SlideshowTileFragment.newInstance(product);
     }
 
     @Override
     public int getCount() {
-        return count;
+        return products.size();
     }
 }
