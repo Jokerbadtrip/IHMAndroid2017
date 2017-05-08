@@ -51,14 +51,14 @@ public class StoreViewFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         listView = (ListView) getView().findViewById(R.id.list_content);
         List<Store> stores = new ArrayList<>();
-        stores.add(new Store("","name","Marseille","","",""));
-        stores.add(new Store("","nom","Lyon","","",""));
+        stores.add(new Store("","name","Marseille","","","","desc"));
+        stores.add(new Store("","nom","Lyon","","","","ription"));
         final StoreViewAdapter adapter = new StoreViewAdapter(this.getContext(), stores);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Serializable product = (Serializable) parent.getItemAtPosition(position);
+                Store store = (Store) parent.getItemAtPosition(position);
 
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -66,16 +66,16 @@ public class StoreViewFragment extends Fragment {
 
                 Bundle bundle = new Bundle();
 
-                if (product!=null){
-                    bundle.putSerializable("product", product);
-                    Log.e("product", "is not null");
+                if (store!=null){
+                    bundle.putSerializable("store", store);
+                    Log.e("store", "is not null");
                 }
                 else{
-                    Log.e("product", "is null");
+                    Log.e("store", "is null");
                 }
 
                 fragment.setArguments(bundle);
-                ft.replace(R.id.store_detailed_view, fragment);
+                ft.replace(R.id.content_frame, fragment);
                 ft.addToBackStack(null);
                 ft.commit();
             }

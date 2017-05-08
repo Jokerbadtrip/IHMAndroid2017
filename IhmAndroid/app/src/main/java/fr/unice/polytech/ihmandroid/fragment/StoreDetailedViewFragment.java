@@ -10,11 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 import fr.unice.polytech.ihmandroid.R;
 import fr.unice.polytech.ihmandroid.model.Product;
+import fr.unice.polytech.ihmandroid.model.Store;
 
 /**
  * Created by MSI on 05/05/2017.
@@ -66,6 +68,17 @@ public class StoreDetailedViewFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        Store store = (Store) bundle.getSerializable("store");
+
+        storeName.setText(store.getName());
+        storeDescription.setText(store.getDescription());
+        storeAdress.setText(store.getAdress());
+        storeCityNumber.setText(store.getCityNumber());
+        storeCity.setText(store.getCity());
+
+        Glide.with(this.getContext()).load(store.getImageURL()).placeholder(R.mipmap.store_placeholder).into(storeImage);
 
     }
 }
