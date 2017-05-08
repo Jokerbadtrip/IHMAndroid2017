@@ -50,7 +50,7 @@ public class StoreViewAdapter extends ArrayAdapter {
         TextView storeCity = (TextView) view.findViewById(R.id.store_city);
         storeName.setText(store.getName());
         storeCity.setText(store.getCity());
-        Glide.with(this.getContext()).load(store.getImageURL()).placeholder(R.mipmap.store_placeholder).into(storeImage);
+        Glide.with(this.getContext()).load(store.getImageURL()).placeholder(R.drawable.store_placeholder).into(storeImage);
 
 
         return view;

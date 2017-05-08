@@ -1,7 +1,9 @@
 package fr.unice.polytech.ihmandroid.fragment;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +35,7 @@ public class StoreDetailedViewFragment extends Fragment {
     private TextView storeAdress;
     private TextView storeCityNumber;
     private TextView storeCity;
-    private ImageButton storeToProduct;
+    private ImageView storeToProduct;
 
     public StoreDetailedViewFragment() {
 
@@ -61,7 +63,7 @@ public class StoreDetailedViewFragment extends Fragment {
         storeAdress = (TextView) view.findViewById(R.id.store_adress_detailed);
         storeCityNumber = (TextView) view.findViewById(R.id.store_cityNumber_detailed);
         storeCity = (TextView) view.findViewById(R.id.store_city_detailed);
-        storeToProduct = (ImageButton) view.findViewById(R.id.store_product_button);
+        storeToProduct = (ImageView) view.findViewById(R.id.store_product_button);
     }
 
 
@@ -69,7 +71,7 @@ public class StoreDetailedViewFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Bundle bundle = getArguments();
+        final Bundle bundle = getArguments();
         Store store = (Store) bundle.getSerializable("store");
 
         storeName.setText(store.getName());
@@ -78,7 +80,24 @@ public class StoreDetailedViewFragment extends Fragment {
         storeCityNumber.setText(store.getCityNumber());
         storeCity.setText(store.getCity());
 
-        Glide.with(this.getContext()).load(store.getImageURL()).placeholder(R.mipmap.store_placeholder).into(storeImage);
+        Glide.with(this.getContext()).load(R.drawable.store_to_product).into(storeToProduct);
+
+        Glide.with(this.getContext()).load(store.getImageURL()).placeholder(R.drawable.store_placeholder).into(storeImage);
+
+        storeToProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                Fragment fragment = StoreInventoryFragment.newInstance();
+
+                fragment.setArguments(bundle);
+                ft.replace(R.id.content_frame, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
+
 
     }
 }

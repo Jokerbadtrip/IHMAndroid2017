@@ -57,6 +57,10 @@ public class Store implements Serializable {
         return description;
     }
 
+    public List<Product> getInventory() {
+        return inventory;
+    }
+
     public void addProduct(Product product){
         inventory.add(product);
     }
@@ -64,5 +68,7 @@ public class Store implements Serializable {
     public void addAllProduct(List<Product> products){
         inventory.addAll(products);
     }
+
+
 
 }

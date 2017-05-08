@@ -1,10 +1,12 @@
 package fr.unice.polytech.ihmandroid.model;
 
+import java.io.Serializable;
+
 /**
  * Created by MSI on 26/04/2017.
  */
 
-public class Product {
+public class Product implements Serializable{
 
     private String id;
     private String name;
