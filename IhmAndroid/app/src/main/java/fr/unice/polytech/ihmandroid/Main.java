@@ -93,6 +93,8 @@ public class Main extends AppCompatActivity
     }
 
 
+
+
     public void displayView(int itemId){
 
         Fragment fragment = null;

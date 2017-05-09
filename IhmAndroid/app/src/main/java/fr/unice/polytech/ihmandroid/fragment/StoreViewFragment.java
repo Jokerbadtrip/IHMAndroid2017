@@ -85,6 +85,7 @@ public class StoreViewFragment extends Fragment {
                 ft.replace(R.id.content_frame, fragment);
                 ft.addToBackStack(null);
                 ft.commit();
+                
             }
         });
     }

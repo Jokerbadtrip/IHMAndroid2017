@@ -29,5 +29,6 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.moondroid.coverflow:library:1.0'
     testCompile 'junit:junit:4.12'
 }
