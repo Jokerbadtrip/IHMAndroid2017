@@ -11,4 +11,5 @@
     <string name="navigation_communicate">Communiquer</string>
     <string name="navigation_share">Partager</string>
     <string name="navigation_send">Envoyer</string>
+    <string name="buy_product">Acheter le produit</string>
 </resources>

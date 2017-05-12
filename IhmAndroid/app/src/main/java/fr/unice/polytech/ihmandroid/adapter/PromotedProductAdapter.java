@@ -10,7 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -27,14 +30,14 @@ import fr.unice.polytech.ihmandroid.model.Product;
  * Created by MSI on 09/05/2017.
  */
 
-public class PromotedProductPagerAdapter extends BaseAdapter {
+public class PromotedProductAdapter extends BaseAdapter {
 
 
     private List<Product> products;
     private Activity activity;
     private FragmentTransaction ft;
 
-    public PromotedProductPagerAdapter(Activity activity, @NonNull List<Product> products, FragmentTransaction ft) {
+    public PromotedProductAdapter(Activity activity, @NonNull List<Product> products, FragmentTransaction ft) {
         this.products=products;
         this.activity=activity;
         this.ft = ft;
@@ -71,6 +74,9 @@ public class PromotedProductPagerAdapter extends BaseAdapter {
         ImageView productImage = (ImageView) view.findViewById(R.id.promoted_product_image);
         TextView productName = (TextView) view.findViewById(R.id.promoted_product_name);
         TextView productPrice = (TextView) view.findViewById(R.id.promoted_product_price);
+        LinearLayout layout = (LinearLayout) view.findViewById(R.id.layout);
+
+
 
         productName.setText(products.get(position).getName());
         productPrice.setText(String.valueOf(products.get(position).getPrice()));
@@ -79,7 +85,9 @@ public class PromotedProductPagerAdapter extends BaseAdapter {
                 .placeholder(R.drawable.store_placeholder)
                 .into(productImage);
 
-        view.setOnClickListener(new View.OnClickListener() {
+
+
+        layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);

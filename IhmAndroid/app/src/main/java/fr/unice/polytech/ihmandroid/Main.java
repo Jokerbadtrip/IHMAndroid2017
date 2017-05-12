@@ -40,7 +40,7 @@ public class Main extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        displayView(R.id.nav_stores);
+        displayView(R.id.nav_promoted);
 
     }
 
