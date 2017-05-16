@@ -11,12 +11,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.unice.polytech.ihmandroid.R;
 import fr.unice.polytech.ihmandroid.adapter.StoreViewAdapter;
+import fr.unice.polytech.ihmandroid.database.DatabaseHelper;
 import fr.unice.polytech.ihmandroid.model.Product;
 import fr.unice.polytech.ihmandroid.model.Store;
 
@@ -50,16 +53,30 @@ public class StoreViewFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         listView = (ListView) getView().findViewById(R.id.list_content);
+
+
+
+        DatabaseHelper db = new DatabaseHelper(getContext());
+        try {
+            db.createDataBase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            db.openDataBase();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        db.buildStores();
+
         List<Store> stores = new ArrayList<>();
-        List<Product> products = new ArrayList<>();
-        products.add(new Product("", "Brosse", "ménage", "", 19.99, "Brosse de ouf"));
-        products.add(new Product("", "Miroir", "ménage", "", 19.99, "Miroir de ouf"));
+        stores.addAll(db.getStores());
 
-        Store store = (new Store("","name","Marseille","","","","desc"));
-        store.addAllProduct(products);
+        db.close();
 
-        stores.add(store);
-        stores.add(new Store("","nom","Lyon","","","","ription"));
+
         final StoreViewAdapter adapter = new StoreViewAdapter(this.getContext(), stores);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

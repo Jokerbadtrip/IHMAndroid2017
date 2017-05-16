@@ -79,7 +79,7 @@ public class PromotedProductAdapter extends BaseAdapter {
 
 
         productName.setText(products.get(position).getName());
-        productPrice.setText(String.valueOf(products.get(position).getPrice()));
+        productPrice.setText(String.valueOf(products.get(position).getPrice())+"€");
         Glide.with(activity)
                 .load(products.get(position).getImage())
                 .placeholder(R.drawable.store_placeholder)

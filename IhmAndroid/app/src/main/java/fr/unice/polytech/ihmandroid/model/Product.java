@@ -18,6 +18,8 @@ public class Product implements Serializable{
     private boolean reduction = false;
 
 
+
+
     public Product(String id, String name, String category, String image, double price, String description) {
         this.id = id;
         this.name = name;
@@ -33,7 +35,6 @@ public class Product implements Serializable{
         }
 
     }
-
 
     public String getName() {
         return name;
@@ -51,17 +52,20 @@ public class Product implements Serializable{
         return description;
     }
 
-
     public void setPromoted(){
         promoted  = true;
     }
 
     public void setReduction(double percentage){
         reduction = true;
-        price = price - price*percentage;
+        price = price - price*(percentage/100);
     }
 
     public String getImage() {
         return image;
+    }
+
+    public boolean isPromoted(){
+        return promoted;
     }
 }

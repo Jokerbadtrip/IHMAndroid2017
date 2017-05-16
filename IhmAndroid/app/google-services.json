@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "604833368784",
+    "firebase_url": "https://ihmandroid-4f125.firebaseio.com",
+    "project_id": "ihmandroid-4f125",
+    "storage_bucket": "ihmandroid-4f125.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604833368784:android:1f67e9e44a653cf3",
+        "android_client_info": {
+          "package_name": "fr.unice.polytech.ihmandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604833368784-et2ahq6v7kcrt9k8tfbdf6gbqfplsmbd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.unice.polytech.ihmandroid",
+            "certificate_hash": "7e0918fa5f8c6f9dc313bf7e7cc9057d8d6a15d6"
+          }
+        },
+        {
+          "client_id": "604833368784-3glsedb0cnjiku79ppl7d9g19fv3lo72.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA26w5-sFQu8ABGwNfHfh3T19LLwln4vAA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604833368784-3glsedb0cnjiku79ppl7d9g19fv3lo72.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -12,4 +12,7 @@
     <string name="navigation_share">Partager</string>
     <string name="navigation_send">Envoyer</string>
     <string name="buy_product">Acheter le produit</string>
+    <string name="connect_to_google">Se connecter au compte Google</string>
+    <string name="connected_as">Connecté en tant que : </string>
+    <string name="store_to_product_button">Voir les produits en stock</string>
 </resources>

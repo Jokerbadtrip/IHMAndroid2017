@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import fr.unice.polytech.ihmandroid.fragment.MyAccountNotConnectedFragment;
 import fr.unice.polytech.ihmandroid.fragment.ProductViewFragment;
 import fr.unice.polytech.ihmandroid.fragment.PromotedViewFragment;
 import fr.unice.polytech.ihmandroid.fragment.StoreViewFragment;
@@ -112,7 +113,8 @@ public class Main extends AppCompatActivity
 
 
         } else if (itemId == R.id.nav_account) {
-
+            fragment = MyAccountNotConnectedFragment.newInstance();
+            title="Mon compte";
         } else if (itemId == R.id.nav_promoted){
             fragment = PromotedViewFragment.newInstance();
             title = "Produits phares";

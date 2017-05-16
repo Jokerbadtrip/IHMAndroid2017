@@ -63,7 +63,7 @@ public class ProductDetailedFragment extends Fragment {
         productName.setText(product.getName());
         productDescription.setText(product.getDescription());
         productCategory.setText("catégorie : " + product.getCategory());
-        productPrice.setText("prix : " + String.valueOf(product.getPrice()));
+        productPrice.setText("prix : " + String.valueOf(product.getPrice())+"€");
 
         Glide.with(this.getContext()).load(product.getImage()).placeholder(R.drawable.store_placeholder).into(productImage);
 

@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,7 +36,7 @@ public class StoreDetailedViewFragment extends Fragment {
     private TextView storeAdress;
     private TextView storeCityNumber;
     private TextView storeCity;
-    private ImageView storeToProduct;
+    private Button storeToProduct;
 
     public StoreDetailedViewFragment() {
 
@@ -63,7 +64,7 @@ public class StoreDetailedViewFragment extends Fragment {
         storeAdress = (TextView) view.findViewById(R.id.store_adress_detailed);
         storeCityNumber = (TextView) view.findViewById(R.id.store_cityNumber_detailed);
         storeCity = (TextView) view.findViewById(R.id.store_city_detailed);
-        storeToProduct = (ImageView) view.findViewById(R.id.store_product_button);
+        storeToProduct = (Button) view.findViewById(R.id.store_product_button);
     }
 
 
@@ -77,10 +78,10 @@ public class StoreDetailedViewFragment extends Fragment {
         storeName.setText(store.getName());
         storeDescription.setText(store.getDescription());
         storeAdress.setText(store.getAdress());
-        storeCityNumber.setText(store.getCityNumber());
+        storeCityNumber.setText(store.getCityNumber()+", ");
         storeCity.setText(store.getCity());
 
-        Glide.with(this.getContext()).load(R.drawable.store_to_product).into(storeToProduct);
+
 
         Glide.with(this.getContext()).load(store.getImageURL()).placeholder(R.drawable.store_placeholder).into(storeImage);
 
