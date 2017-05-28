@@ -7,159 +7,172 @@
     android:layout_height="match_parent"
     app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 
-    <View
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_margin="5dp"
-        android:background="@color/view_divider_color" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp">
-
-        <View
-            android:layout_width="2dp"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:background="@color/view_divider_color" />
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/store_image_detailed"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:scaleType="fitXY"/>
-
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:background="@color/view_divider_color" />
-
-        <TextView
-            android:id="@+id/store_name_detailed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:padding="5dp"
-            android:paddingLeft="50dp"/>
-
-
-
-    </LinearLayout>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_margin="5dp"
-        android:background="@color/view_divider_color" />
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="2dp"
+                android:layout_margin="5dp"
+                android:background="@color/view_divider_color" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@color/view_divider_color" />
+
+                <ImageView
+                    android:id="@+id/store_image_detailed"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitXY"/>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@color/view_divider_color" />
 
                 <TextView
-                    android:layout_gravity="center"
-                    android:id="@+id/store_description_detailed"
+                    android:id="@+id/store_name_detailed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:textAlignment="center"
-                    android:padding="5dp"/>
+                    android:padding="5dp"
+                    android:paddingLeft="50dp"/>
+
+
 
             </LinearLayout>
-        </ScrollView>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_margin="5dp"
+                android:background="@color/view_divider_color" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <ScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_gravity="center"
+                            android:id="@+id/store_description_detailed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:padding="5dp"/>
+
+                    </LinearLayout>
+                </ScrollView>
 
 
 
 
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_margin="5dp"
-            android:background="@color/view_divider_color" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/view_divider_color" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Adresse :"
-            android:textAlignment="center"
-            android:textSize="20dp"
-            android:padding="5dp"/>
-
-
-
-        <TextView
-            android:id="@+id/store_adress_detailed"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Adresse :"
+                    android:textAlignment="center"
+                    android:textSize="20dp"
+                    android:padding="5dp"/>
 
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
-
-            <TextView
-                android:id="@+id/store_cityNumber_detailed"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/store_city_detailed"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/store_adress_detailed"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
 
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
 
+                    <TextView
+                        android:id="@+id/store_cityNumber_detailed"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/store_city_detailed"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+
+
+
+                </LinearLayout>
+
+
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/view_divider_color" />
+
+                <Button
+                    android:id="@+id/store_product_button"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/store_to_product_button"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_margin="5dp"
+                android:background="@color/view_divider_color" />
 
         </LinearLayout>
+    </ScrollView>
 
 
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_margin="5dp"
-            android:background="@color/view_divider_color" />
-
-        <Button
-            android:id="@+id/store_product_button"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/store_to_product_button"/>
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_margin="5dp"
-        android:background="@color/view_divider_color" />
 
 
 </LinearLayout>

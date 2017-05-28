@@ -1,7 +1,6 @@
 package fr.unice.polytech.ihmandroid.adapter;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +41,7 @@ public class StoreInventoryAdapter extends ArrayAdapter {
         View view;
 
         if (convertView==null){
-            view = inflater.inflate(R.layout.store_inventory_tile, null);
+            view = inflater.inflate(R.layout.product_list_tile, null);
         }
 
         else{
@@ -51,7 +50,7 @@ public class StoreInventoryAdapter extends ArrayAdapter {
 
         findViewById(view);
         productName.setText(getItem(position).getName());
-        productPrice.setText(String.valueOf(getItem(position).getPrice()));
+        productPrice.setText(String.valueOf(getItem(position).getPrice())+"€");
 
         Glide.with(this.getContext()).load(getItem(position).getImage()).placeholder(R.drawable.store_placeholder).into(productImage);
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
+
+
+    <com.google.android.gms.common.SignInButton
+        android:title="@string/connect_to_google"
+        android:id="@+id/connect_with_google_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/connect_with_facebook_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:text="@string/connect_to_firebase"
+        android:id="@+id/connect_with_firebase_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:text="@string/register_to_firebase"
+        android:id="@+id/register_with_firebase_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+
+
+
+</LinearLayout>

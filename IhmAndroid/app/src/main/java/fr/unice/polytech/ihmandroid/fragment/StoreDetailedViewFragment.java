@@ -1,6 +1,5 @@
 package fr.unice.polytech.ihmandroid.fragment;
 
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -8,13 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.unice.polytech.ihmandroid.R;
@@ -73,7 +72,7 @@ public class StoreDetailedViewFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         final Bundle bundle = getArguments();
-        Store store = (Store) bundle.getSerializable("store");
+        final Store store = bundle.getParcelable("store");
 
         storeName.setText(store.getName());
         storeDescription.setText(store.getDescription());
@@ -90,9 +89,15 @@ public class StoreDetailedViewFragment extends Fragment {
             public void onClick(View v) {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                Fragment fragment = StoreInventoryFragment.newInstance();
+                Fragment fragment = ProductListFragment.newInstance();
+
+                Bundle bundle = new Bundle();
+                ArrayList<Product> products = (ArrayList<Product>) store.getInventory();
+
+                bundle.putParcelableArrayList("products", products);
 
                 fragment.setArguments(bundle);
+
                 ft.replace(R.id.content_frame, fragment);
                 ft.addToBackStack(null);
                 ft.commit();

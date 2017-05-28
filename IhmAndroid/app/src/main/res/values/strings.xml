@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">ToBeOrToHave</string>
+    
+    <string name="facebook_app_id">136344220247700</string>
+    <string name="fb_login_protocol_scheme">fb136344220247700</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -11,8 +14,30 @@
     <string name="navigation_communicate">Communiquer</string>
     <string name="navigation_share">Partager</string>
     <string name="navigation_send">Envoyer</string>
-    <string name="buy_product">Acheter le produit</string>
-    <string name="connect_to_google">Se connecter au compte Google</string>
-    <string name="connected_as">Connecté en tant que : </string>
+    
+    
+    <string name="buy_product_online">Acheter le produit en ligne</string>
+    
+    
+    <string name="view_stores_having_product">Voir les magasins ayant ce produit en stock</string>
     <string name="store_to_product_button">Voir les produits en stock</string>
+    
+    <string name="connect_to_google">Se connecter au compte Google</string>
+    <string name="connect_to_firebase">Se connecter</string>
+    <string name="register_to_firebase">S\'enregistrer</string>
+    <string name="connection_failed">La connexion a échouée, le mot de passe et/ou l\'adresse e-mail est invalide</string>
+    <string name="connected_as">Connecté en tant que : </string>
+    <string name="account_address">Votre adresse : </string>
+    <string name="account_email">Votre courriel : </string>
+    <string name="modify_user_email">Modifer le courriel</string>
+    <string name="sponsorship">Le parrainage vous permet de gagner des points de fidélité.
+        Les points de fidélité servent à avoir des promotions sur notre sélection de produits.</string>
+    <string name="fidelity_points">Vos points de fidélité actuels</string>
+    <string name="sponsorship_button">Parrainer quelqu\'un</string>
+    <string name="modify_password">Réinitialiser le mot de passe</string>
+    <string name="modify_address">Modifier votre adresse</string>
+    
+
+    <string name="share_button_title">Partager</string>
+    
 </resources>

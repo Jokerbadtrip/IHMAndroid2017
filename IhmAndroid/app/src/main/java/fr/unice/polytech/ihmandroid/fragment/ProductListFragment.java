@@ -3,12 +3,13 @@ package fr.unice.polytech.ihmandroid.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import java.util.List;
 
 import fr.unice.polytech.ihmandroid.R;
 import fr.unice.polytech.ihmandroid.adapter.StoreInventoryAdapter;
@@ -19,21 +20,21 @@ import fr.unice.polytech.ihmandroid.model.Store;
  * Created by MSI on 08/05/2017.
  */
 
-public class StoreInventoryFragment extends Fragment {
+public class ProductListFragment extends Fragment {
 
     ListView listView;
 
-    public StoreInventoryFragment() {
+    public ProductListFragment() {
     }
 
     public static Fragment newInstance(){
-        return new StoreInventoryFragment();
+        return new ProductListFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.store_inventory_layout, container, false);
+        View rootView = inflater.inflate(R.layout.product_list, container, false);
         findViewById(rootView);
         return rootView;
     }
@@ -47,9 +48,9 @@ public class StoreInventoryFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         Bundle bundle = getArguments();
-        Store store = (Store) bundle.getSerializable("store");
+        List<Product> products = bundle.getParcelableArrayList("products");
 
-        final StoreInventoryAdapter adapter = new StoreInventoryAdapter(this.getContext(), store.getInventory());
+        final StoreInventoryAdapter adapter = new StoreInventoryAdapter(this.getContext(), products);
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,14 +63,7 @@ public class StoreInventoryFragment extends Fragment {
                 Fragment fragment = ProductDetailedFragment.newInstance();
 
                 Bundle bundle = new Bundle();
-
-                if (product!=null){
-                    bundle.putSerializable("product", product);
-                    Log.e("product", "is not null");
-                }
-                else{
-                    Log.e("product", "is null");
-                }
+                bundle.putParcelable("product", product);
 
                 fragment.setArguments(bundle);
                 ft.replace(R.id.content_frame, fragment);

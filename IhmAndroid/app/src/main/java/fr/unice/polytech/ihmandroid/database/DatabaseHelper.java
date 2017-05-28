@@ -111,7 +111,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         while (!cursor.isAfterLast()){
-            String id;
+            int id;
             String name;
             String city;
             String adress;
@@ -120,7 +120,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String description;
 
 
-            id = cursor.getString(0);
+            id = cursor.getInt(0);
             name = cursor.getString(1);
             city = cursor.getString(2);
             adress = cursor.getString(3);
@@ -144,7 +144,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         while (!cursor.isAfterLast()){
 
-            String id;
+            int id;
             String name;
             String category;
             String image;
@@ -152,7 +152,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String description;
 
 
-            id = cursor.getString(0);
+            id = cursor.getInt(0);
             name = cursor.getString(1);
             category = cursor.getString(2);
             image = cursor.getString(3);
@@ -174,6 +174,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             cursor.moveToNext();
         }
+
+    }
+
+
+    public void buildInventories(){
+
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM inventory", null);
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+
+            int storeid;
+            int productid;
+
+            productid  = cursor.getInt(0);
+            storeid = cursor.getInt(1);
+
+
+            for (Store store : stores){
+                if (store.getId()==storeid){
+                    for (Product product : products){
+                        if (product.getId()==productid){
+                            store.addProduct(product);
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            cursor.moveToNext();
+
+        }
+
 
     }
 

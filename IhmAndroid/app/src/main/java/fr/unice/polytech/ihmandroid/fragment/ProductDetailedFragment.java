@@ -1,17 +1,32 @@
 package fr.unice.polytech.ihmandroid.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.unice.polytech.ihmandroid.R;
+import fr.unice.polytech.ihmandroid.database.DatabaseHelper;
 import fr.unice.polytech.ihmandroid.model.Product;
+import fr.unice.polytech.ihmandroid.model.Store;
 
 /**
  * Created by MSI on 08/05/2017.
@@ -26,6 +41,9 @@ public class ProductDetailedFragment extends Fragment {
     private TextView productPrice;
     private TextView productDescription;
     private TextView productCategory;
+    private Button buyOnline;
+    private Button viewStores;
+    private Button shareButton;
 
 
     public ProductDetailedFragment() {
@@ -50,27 +68,116 @@ public class ProductDetailedFragment extends Fragment {
         productPrice = (TextView) view.findViewById(R.id.product_price);
         productDescription = (TextView) view.findViewById(R.id.product_description);
         productCategory = (TextView) view.findViewById(R.id.product_category);
+        buyOnline = (Button) view.findViewById(R.id.buy_product_online_button);
+        viewStores = (Button) view.findViewById(R.id.view_stores_having_product_button);
+        shareButton = (Button) view.findViewById(R.id.share_button);
 
     }
+
+
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         Bundle bundle = getArguments();
-        Product product = (Product) bundle.getSerializable("product");
+        final Product product = bundle.getParcelable("product");
 
         productName.setText(product.getName());
         productDescription.setText(product.getDescription());
         productCategory.setText("catégorie : " + product.getCategory());
         productPrice.setText("prix : " + String.valueOf(product.getPrice())+"€");
 
+        viewStores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseHelper db = new DatabaseHelper(getContext());
+                ArrayList<Store> stores = new ArrayList<Store>();
+                try {
+                    db.createDataBase();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    db.openDataBase();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                db.buildStores();
+                db.buildProducts();
+                db.buildInventories();
+
+                stores.addAll(db.getStores());
+                stores = buildStores(product, stores);
+
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("stores", stores);
+
+                Fragment fragment = StoreListFragment.newInstance();
+                fragment.setArguments(bundle);
+
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
+                ft.replace(R.id.content_frame, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+
+            }
+        });
+
+
+        buyOnline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, product.getName());
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "http://www.macrogamia.com/products/"+ product.getName());
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, "Partager avec : "));
+            }
+        });
+
         Glide.with(this.getContext()).load(product.getImage()).placeholder(R.drawable.store_placeholder).into(productImage);
 
 
     }
 
+    private ArrayList<Store> buildStores(Product product, List<Store> stores){
 
+        ArrayList<Store> newStores = new ArrayList<>();
+
+        for (Store store : stores){
+            for (Product product1 : store.getInventory()){
+                if (product.getId()==product1.getId()){
+                    newStores.add(store);
+                }
+            }
+        }
+        return newStores;
+
+
+
+    }
+
+
+    private void setShareIntent(Intent intent){
+
+
+
+    }
 
 
 }

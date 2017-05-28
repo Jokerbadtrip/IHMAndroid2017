@@ -2,6 +2,7 @@ package fr.unice.polytech.ihmandroid.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -94,8 +95,9 @@ public class PromotedProductAdapter extends BaseAdapter {
                 Fragment fragment = ProductDetailedFragment.newInstance();
 
                 Product product = getItem(position);
+
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("product", product);
+                bundle.putParcelable("product", product);
 
                 fragment.setArguments(bundle);
                 ft.replace(R.id.content_frame, fragment);

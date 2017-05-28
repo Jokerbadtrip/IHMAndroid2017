@@ -1,27 +1,40 @@
 package fr.unice.polytech.ihmandroid;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import fr.unice.polytech.ihmandroid.fragment.MyAccountConnectedFragment;
 import fr.unice.polytech.ihmandroid.fragment.MyAccountNotConnectedFragment;
-import fr.unice.polytech.ihmandroid.fragment.ProductViewFragment;
+import fr.unice.polytech.ihmandroid.fragment.CategoriesViewFragment;
 import fr.unice.polytech.ihmandroid.fragment.PromotedViewFragment;
-import fr.unice.polytech.ihmandroid.fragment.StoreViewFragment;
+import fr.unice.polytech.ihmandroid.fragment.StoreListFragment;
 
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
-    private boolean onAccount = false;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +62,6 @@ public class Main extends AppCompatActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu){
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.action_tri).setVisible(!onAccount);
         return true;
     }
 
@@ -67,6 +79,9 @@ public class Main extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem shareButton = menu.findItem(R.id.share_button);
+        ShareActionProvider mShareActionProvider;
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareButton);
         return true;
     }
 
@@ -78,9 +93,7 @@ public class Main extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.sorting_by_city) {
 
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -103,22 +116,31 @@ public class Main extends AppCompatActivity
 
 
         if (itemId == R.id.nav_stores) {
-            fragment = StoreViewFragment.newInstance();
+            Log.d("Navigation :", "displaying stores");
+            fragment = StoreListFragment.newInstance();
             title  = "Magasins";
-
         } else if (itemId == R.id.nav_products) {
-            fragment = ProductViewFragment.newInstance();
+            Log.d("Navigation :", "displaying products");
+            fragment = CategoriesViewFragment.newInstance();
             title = "Produits";
         } else if (itemId == R.id.nav_offers) {
-
-
+            Log.d("Navigation :", "displaying offers");
         } else if (itemId == R.id.nav_account) {
-            fragment = MyAccountNotConnectedFragment.newInstance();
+            Log.d("Navigation :", "displaying account");
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+            if (user==null){
+                fragment = MyAccountNotConnectedFragment.newInstance();
+            }
+            else {
+                fragment = MyAccountConnectedFragment.newInstance();
+            }
+
             title="Mon compte";
         } else if (itemId == R.id.nav_promoted){
+            Log.d("Navigation :", "displaying promoted products");
             fragment = PromotedViewFragment.newInstance();
             title = "Produits phares";
-
         } else if (itemId == R.id.nav_share) {
 
         } else if (itemId == R.id.nav_send) {

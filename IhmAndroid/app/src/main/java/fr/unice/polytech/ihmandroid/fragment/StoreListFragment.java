@@ -3,16 +3,13 @@ package fr.unice.polytech.ihmandroid.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,24 +17,23 @@ import java.util.List;
 import fr.unice.polytech.ihmandroid.R;
 import fr.unice.polytech.ihmandroid.adapter.StoreViewAdapter;
 import fr.unice.polytech.ihmandroid.database.DatabaseHelper;
-import fr.unice.polytech.ihmandroid.model.Product;
 import fr.unice.polytech.ihmandroid.model.Store;
 
 /**
  * Created by MSI on 26/04/2017.
  */
 
-public class StoreViewFragment extends Fragment {
+public class StoreListFragment extends Fragment {
 
 
     private ListView listView;
 
-    public StoreViewFragment() {
+    public StoreListFragment() {
     }
 
 
     public static Fragment newInstance() {
-        StoreViewFragment fragment = new StoreViewFragment();
+        StoreListFragment fragment = new StoreListFragment();
         return fragment;
     }
 
@@ -54,27 +50,38 @@ public class StoreViewFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         listView = (ListView) getView().findViewById(R.id.list_content);
 
+        Bundle bundle = getArguments();
+        ArrayList<Store> stores = new ArrayList<>();
+
+        if (bundle == null){
+            DatabaseHelper db = new DatabaseHelper(getContext());
+            try {
+                db.createDataBase();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                db.openDataBase();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            db.buildStores();
+            db.buildProducts();
+            db.buildInventories();
 
 
-        DatabaseHelper db = new DatabaseHelper(getContext());
-        try {
-            db.createDataBase();
-        } catch (IOException e) {
-            e.printStackTrace();
+            stores.addAll(db.getStores());
+
+            db.close();
+
         }
-        try {
-            db.openDataBase();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        else{
+            stores = bundle.getParcelableArrayList("stores");
         }
-        db.buildStores();
 
-        List<Store> stores = new ArrayList<>();
-        stores.addAll(db.getStores());
 
-        db.close();
 
 
         final StoreViewAdapter adapter = new StoreViewAdapter(this.getContext(), stores);
@@ -89,14 +96,7 @@ public class StoreViewFragment extends Fragment {
                 Fragment fragment = StoreDetailedViewFragment.newInstance();
 
                 Bundle bundle = new Bundle();
-
-                if (store!=null){
-                    bundle.putSerializable("store", store);
-                    Log.e("store", "is not null");
-                }
-                else{
-                    Log.e("store", "is null");
-                }
+                bundle.putParcelable("store", store);
 
                 fragment.setArguments(bundle);
                 ft.replace(R.id.content_frame, fragment);
