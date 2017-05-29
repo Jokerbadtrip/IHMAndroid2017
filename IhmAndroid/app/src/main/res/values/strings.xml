@@ -36,6 +36,8 @@
     <string name="sponsorship_button">Parrainer quelqu\'un</string>
     <string name="modify_password">Réinitialiser le mot de passe</string>
     <string name="modify_address">Modifier votre adresse</string>
+    <string name="modify_email">Modifier votre courriel</string>
+    <string name="password_forgotten">Mot de passe oublié</string>
     
 
     <string name="share_button_title">Partager</string>

@@ -1,15 +1,21 @@
 package fr.unice.polytech.ihmandroid.fragment;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -172,22 +178,118 @@ public class MyAccountConnectedFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mAuth.sendPasswordResetEmail(user.getEmail());
-                mAuth.signOut();
-
                 Toast.makeText(getContext(), "Vous allez recevoir un e-mail pour réinitialiser votre mot de passe. Veuillez vous reconnecter", Toast.LENGTH_LONG).show();
+                disconnect();
+            }
+        });
 
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                Fragment fragment = MyAccountNotConnectedFragment.newInstance();
-                ft.replace(R.id.content_frame, fragment);
-                ft.addToBackStack(null);
-                ft.commit();
+        modifyEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                alertDialog.setTitle("Modifier l'adresse e-mail");
+
+                final EditText email = new EditText(getContext());
+                email.setHint("Courriel");
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                email.setLayoutParams(lp);
+                alertDialog.setView(email);
+                alertDialog.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String newEmail = email.getText().toString().trim();
+
+                        if (TextUtils.isEmpty(newEmail)){
+
+                            email.setError("Le champ ne peut pas être vide");
+
+                        }else{
+                            user.updateEmail(newEmail);
+                            user.sendEmailVerification();
+                            dialog.cancel();
+                            disconnect();
+
+
+
+                        }
+
+
+                    }
+                });
+
+                alertDialog.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+            }
+        });
+
+
+        modifyAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                alertDialog.setTitle("Modifier l'adresse");
+
+                final EditText address = new EditText(getContext());
+                address.setHint("Adresse postale");
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                address.setLayoutParams(lp);
+
+                alertDialog.setView(address);
+
+                alertDialog.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                alertDialog.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String newAddress = address.getText().toString().trim();
+
+                        if (TextUtils.isEmpty(newAddress)){
+                            address.setError("Le champ est vide");
+                        }
+                        else{
+
+                            DatabaseReference mDataBase = FirebaseDatabase.getInstance().getReference();
+                            mDataBase.child("users").child(mAuth.getCurrentUser().getUid()).child("address").setValue(newAddress);
+                            dialog.cancel();
+
+                        }
+                    }
+                });
             }
         });
 
 
     }
 
+
+    private void disconnect(){
+
+        mAuth.signOut();
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        Fragment fragment = MyAccountNotConnectedFragment.newInstance();
+        ft.replace(R.id.content_frame, fragment);
+        ft.addToBackStack(null);
+        ft.commit();
+
+
+    }
 
 
 

@@ -1,9 +1,11 @@
 package fr.unice.polytech.ihmandroid.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -32,7 +35,7 @@ public class SignInWithFireBaseFragment extends Fragment {
 
 
     private EditText email, password;
-    private Button connect;
+    private Button connect, passwordForgotten;
     private ProgressBar progressBar;
 
     private FirebaseAuth mAuth;
@@ -76,6 +79,7 @@ public class SignInWithFireBaseFragment extends Fragment {
         password = (EditText) view.findViewById(R.id.user_password);
         connect = (Button) view.findViewById(R.id.connect_button);
         progressBar = (ProgressBar) view.findViewById(R.id.sign_in_progress_bar);
+        passwordForgotten = (Button) view.findViewById(R.id.password_forgotten);
     }
 
     @Override
@@ -87,6 +91,46 @@ public class SignInWithFireBaseFragment extends Fragment {
 
                 progressBar.setVisibility(View.VISIBLE);
                 signIn();
+            }
+        });
+
+        passwordForgotten.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                alertDialog.setTitle("Mot de passe oublié");
+                final EditText email = new EditText(getContext());
+                email.setHint("Courriel");
+
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+
+                email.setLayoutParams(lp);
+                alertDialog.setView(email);
+
+                alertDialog.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                alertDialog.setPositiveButton("Réinitialiser le mot de passe", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String newEmail = email.getText().toString().trim();
+
+                        if (TextUtils.isEmpty(newEmail)){
+                            email.setError("Le champ est vide");
+                        }
+                        else{
+                            mAuth.sendPasswordResetEmail(newEmail);
+                            dialog.cancel();
+                        }
+                    }
+                });
+
             }
         });
     }
@@ -152,4 +196,6 @@ public class SignInWithFireBaseFragment extends Fragment {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
+
+
 }

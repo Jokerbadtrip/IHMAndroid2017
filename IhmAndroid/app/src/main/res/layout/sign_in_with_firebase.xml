@@ -45,13 +45,19 @@
 
 
 
-            <ProgressBar
-                android:id="@+id/sign_in_progress_bar"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center|bottom"
-                android:layout_marginBottom="20dp"
-                android:visibility="gone"/>
+        <ProgressBar
+            android:id="@+id/sign_in_progress_bar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/connect_button"
@@ -59,6 +65,20 @@
                 android:layout_height="wrap_content"
                 android:text="Se connecter"
                 android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/password_forgotten"
+                android:text="@string/password_forgotten"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+
+
+
+
 
 
 
