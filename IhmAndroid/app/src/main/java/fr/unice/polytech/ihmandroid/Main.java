@@ -1,7 +1,5 @@
 package fr.unice.polytech.ihmandroid;
 
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -18,15 +16,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.unice.polytech.ihmandroid.database.DatabaseHelper;
+import fr.unice.polytech.ihmandroid.fragment.CategoryListFragment;
+import fr.unice.polytech.ihmandroid.fragment.EventFragment;
 import fr.unice.polytech.ihmandroid.fragment.MyAccountConnectedFragment;
 import fr.unice.polytech.ihmandroid.fragment.MyAccountNotConnectedFragment;
-import fr.unice.polytech.ihmandroid.fragment.CategoriesViewFragment;
-import fr.unice.polytech.ihmandroid.fragment.PromotedViewFragment;
+import fr.unice.polytech.ihmandroid.fragment.ProductListFragment;
+import fr.unice.polytech.ihmandroid.fragment.PromotedFragment;
 import fr.unice.polytech.ihmandroid.fragment.StoreListFragment;
+import fr.unice.polytech.ihmandroid.model.Event;
+import fr.unice.polytech.ihmandroid.model.Product;
+import fr.unice.polytech.ihmandroid.model.Store;
 
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -55,6 +63,8 @@ public class Main extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         displayView(R.id.nav_promoted);
+
+
 
     }
 
@@ -121,10 +131,8 @@ public class Main extends AppCompatActivity
             title  = "Magasins";
         } else if (itemId == R.id.nav_products) {
             Log.d("Navigation :", "displaying products");
-            fragment = CategoriesViewFragment.newInstance();
+            fragment = CategoryListFragment.newInstance();
             title = "Produits";
-        } else if (itemId == R.id.nav_offers) {
-            Log.d("Navigation :", "displaying offers");
         } else if (itemId == R.id.nav_account) {
             Log.d("Navigation :", "displaying account");
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -139,12 +147,37 @@ public class Main extends AppCompatActivity
             title="Mon compte";
         } else if (itemId == R.id.nav_promoted){
             Log.d("Navigation :", "displaying promoted products");
-            fragment = PromotedViewFragment.newInstance();
+            fragment = PromotedFragment.newInstance();
             title = "Produits phares";
-        } else if (itemId == R.id.nav_share) {
+        } else if (itemId == R.id.nav_event) {
+            Log.d("Navigation :", "displaying events");
+            fragment = EventFragment.newInstance();
+            title = "Evènements";
+        }else if (itemId == R.id.nav_offers){
+            Log.d("Navigation :", "displaying offers");
+            fragment = ProductListFragment.newInstance();
 
-        } else if (itemId == R.id.nav_send) {
+            DatabaseHelper db = new DatabaseHelper(this);
+            try {
+                db.createDataBase();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                db.openDataBase();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
+
+
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList("products", sortOffers(db.buildProducts()));
+            fragment.setArguments(bundle);
+
+            title = "Promotions";
         }
 
 
@@ -163,6 +196,15 @@ public class Main extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
 
 
+    }
+
+    private ArrayList<Product> sortOffers(List<Product> products){
+
+        ArrayList<Product> offers = new ArrayList<>();
+        for (Product product : products)
+            if (product.isReduction()) offers.add(product);
+
+        return offers;
     }
 
 }

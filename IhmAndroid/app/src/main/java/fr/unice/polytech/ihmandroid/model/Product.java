@@ -137,6 +137,10 @@ public class Product implements Parcelable{
         return promoted;
     }
 
+    public boolean isReduction() {
+        return reduction;
+    }
+
     public int getId() {
         return id;
     }

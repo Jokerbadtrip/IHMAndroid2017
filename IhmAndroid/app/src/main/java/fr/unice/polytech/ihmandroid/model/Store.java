@@ -4,6 +4,8 @@ package fr.unice.polytech.ihmandroid.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,8 @@ public class Store implements Parcelable {
     private String cityNumber;
     private String imageURL;
     private String description;
+    private float lat;
+    private float lng;
     private List<Product> inventory;
 
 
@@ -49,12 +53,14 @@ public class Store implements Parcelable {
         cityNumber = source.readString();
         imageURL  = source.readString();
         description = source.readString();
+        lat = source.readFloat();
+        lng = source.readFloat();
         inventory = source.readArrayList(null);
 
     }
 
 
-    public Store(int id, String name, String city, String adress, String cityNumber, String imageURL, String description) {
+    public Store(int id, String name, String city, String adress, String cityNumber, String imageURL, String description, float lat, float lng) {
         this.id = id;
         this.name = name;
         this.city = city;
@@ -62,6 +68,8 @@ public class Store implements Parcelable {
         this.cityNumber = cityNumber;
         this.imageURL=imageURL;
         this.description=description;
+        this.lat = lat;
+        this.lng = lng;
 
         inventory = new ArrayList<>();
     }
@@ -81,6 +89,8 @@ public class Store implements Parcelable {
         dest.writeString(cityNumber);
         dest.writeString(imageURL);
         dest.writeString(description);
+        dest.writeFloat(lat);
+        dest.writeFloat(lng);
         dest.writeList(inventory);
     }
 
@@ -107,6 +117,14 @@ public class Store implements Parcelable {
 
     public String getDescription() {
         return description;
+    }
+
+    public float getLat() {
+        return lat;
+    }
+
+    public float getLng() {
+        return lng;
     }
 
     public List<Product> getInventory() {

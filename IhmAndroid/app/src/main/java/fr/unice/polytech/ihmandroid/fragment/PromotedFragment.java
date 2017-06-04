@@ -25,17 +25,17 @@ import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
  * Created by MSI on 09/05/2017.
  */
 
-public class PromotedViewFragment extends Fragment {
+public class PromotedFragment extends Fragment {
 
 
     private FeatureCoverFlow coverFlow;
 
 
-    public PromotedViewFragment() {
+    public PromotedFragment() {
     }
 
     public static Fragment newInstance(){
-        return new PromotedViewFragment();
+        return new PromotedFragment();
     }
 
 
@@ -74,11 +74,7 @@ public class PromotedViewFragment extends Fragment {
             e.printStackTrace();
         }
 
-        db.buildProducts();
-
-
-
-        List<Product> promoted_products = buildPromotedProducts(db.getProducts());
+        List<Product> promoted_products = buildPromotedProducts(db.buildProducts());
 
         db.close();
 
@@ -97,6 +93,7 @@ public class PromotedViewFragment extends Fragment {
         }
         return promoted_products;
     }
+
 
 
 

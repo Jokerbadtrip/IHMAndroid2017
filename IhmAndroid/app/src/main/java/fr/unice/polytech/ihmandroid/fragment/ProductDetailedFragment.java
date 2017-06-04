@@ -1,6 +1,7 @@
 package fr.unice.polytech.ihmandroid.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -41,9 +42,8 @@ public class ProductDetailedFragment extends Fragment {
     private TextView productPrice;
     private TextView productDescription;
     private TextView productCategory;
-    private Button buyOnline;
-    private Button viewStores;
-    private Button shareButton;
+    private Button buyOnline, viewStores, shareButton, buyWithApp;
+
 
 
     public ProductDetailedFragment() {
@@ -71,6 +71,7 @@ public class ProductDetailedFragment extends Fragment {
         buyOnline = (Button) view.findViewById(R.id.buy_product_online_button);
         viewStores = (Button) view.findViewById(R.id.view_stores_having_product_button);
         shareButton = (Button) view.findViewById(R.id.share_button);
+        buyWithApp = (Button) view.findViewById(R.id.buy_product_with_app_button);
 
     }
 
@@ -106,11 +107,11 @@ public class ProductDetailedFragment extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                db.buildStores();
-                db.buildProducts();
-                db.buildInventories();
 
-                stores.addAll(db.getStores());
+
+                stores.addAll(db.buildInventories(db.buildStores(), db.buildProducts()));
+                db.close();
+
                 stores = buildStores(product, stores);
 
                 Bundle bundle = new Bundle();
@@ -134,6 +135,10 @@ public class ProductDetailedFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                String name = product.getName().replaceAll(" ","_");
+                Uri uri = Uri.parse("http://www.macrogamia.com/products/"+name+"/buyOnline");
+                Intent intent  = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
             }
         });
 
@@ -141,14 +146,18 @@ public class ProductDetailedFragment extends Fragment {
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = product.getName().replaceAll(" ","_");
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_SUBJECT, product.getName());
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "http://www.macrogamia.com/products/"+ product.getName());
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "http://www.macrogamia.com/products/"+ name);
                 sendIntent.setType("text/plain");
                 startActivity(Intent.createChooser(sendIntent, "Partager avec : "));
             }
         });
+
+
+
 
         Glide.with(this.getContext()).load(product.getImage()).placeholder(R.drawable.store_placeholder).into(productImage);
 

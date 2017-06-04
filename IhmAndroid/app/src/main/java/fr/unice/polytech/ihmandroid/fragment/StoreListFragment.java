@@ -12,7 +12,6 @@ import android.widget.ListView;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.unice.polytech.ihmandroid.R;
 import fr.unice.polytech.ihmandroid.adapter.StoreViewAdapter;
@@ -67,12 +66,10 @@ public class StoreListFragment extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            db.buildStores();
-            db.buildProducts();
-            db.buildInventories();
 
 
-            stores.addAll(db.getStores());
+
+            stores.addAll(db.buildInventories(db.buildStores(), db.buildProducts()));
 
             db.close();
 
@@ -93,7 +90,7 @@ public class StoreListFragment extends Fragment {
 
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                Fragment fragment = StoreDetailedViewFragment.newInstance();
+                Fragment fragment = StoreDetailedFragment.newInstance();
 
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("store", store);

@@ -169,6 +169,12 @@
                 android:layout_margin="5dp"
                 android:background="@color/view_divider_color" />
 
+            <Button
+                android:id="@+id/view_store_on_map"
+                android:text="@string/view_store_on_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
     </ScrollView>
 

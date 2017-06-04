@@ -2,8 +2,8 @@ package fr.unice.polytech.ihmandroid.fragment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -19,7 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +29,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import fr.unice.polytech.ihmandroid.R;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by MSI on 16/05/2017.
@@ -40,12 +42,20 @@ public class MyAccountConnectedFragment extends Fragment {
 
     private DatabaseReference mDataBase;
     private TextView accountName, accountFirtName, accountAddress, accountFidelityPoints, accountEmail;
-    private Button modifyAddress, modifyEmail, modifyPassword, sponsorship;
+    private Button modifyAddress, modifyEmail, modifyPassword, sponsorship, logout;
 
     private FirebaseAuth mAuth;
+    private FirebaseUser user;
 
     private String address, firstname, name;
     private Integer  fidelityPoints;
+
+    private int REQUEST_INVITE = 9002;
+
+    private final String TAG = "MyAccountConnected";
+
+    private final Integer fidelityPointsPerInvite = 10;
+
 
 
     public MyAccountConnectedFragment() {
@@ -63,8 +73,8 @@ public class MyAccountConnectedFragment extends Fragment {
         findViewById(rootView);
 
         mAuth = FirebaseAuth.getInstance();
-
-
+        user = mAuth.getCurrentUser();
+        mDataBase = FirebaseDatabase.getInstance().getReference();
 
 
 
@@ -83,30 +93,26 @@ public class MyAccountConnectedFragment extends Fragment {
         modifyEmail = (Button) view.findViewById(R.id.modify_email);
         modifyPassword = (Button) view.findViewById(R.id.modify_password);
         sponsorship = (Button) view.findViewById(R.id.sponsorship_button);
+        logout = (Button) view.findViewById(R.id.logout_button);
 
     }
 
-    @Override
-    public void onActivityCreated(final Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    private void readUserDataFromDatabase(){
 
-
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        mDataBase = FirebaseDatabase.getInstance().getReference();
         mDataBase.child("users").child(user.getUid())
                 .child("name").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 name = dataSnapshot.getValue(String.class);
-                if (name==null) return;
-                accountName.setText(name);
-                Log.d("Reading user name", name);
+                if (name != null) {
+                    accountName.setText(name);
+                    Log.d(TAG, "Reading user name : " +name);
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e("Reading user name", databaseError.toException().toString());
+                Log.e(TAG, "Reading user name : " +databaseError.toException().toString());
             }
         });
 
@@ -115,20 +121,22 @@ public class MyAccountConnectedFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 firstname = dataSnapshot.getValue(String.class);
-                if (firstname==null) {
-                    accountFirtName.setText(user.getDisplayName());
-                    Log.d("Reading user firstname", user.getDisplayName());
+
+                if (firstname!=null){
+                    accountName.setText(firstname);
+                    Log.d(TAG,"Reading user firstname : " + firstname);
                 }
-                else {
-                    accountFirtName.setText(firstname);
-                    Log.d("Reading user firstname", firstname);
+                else if (firstname == null){
+                    accountName.setText(user.getDisplayName());
+                    Log.d(TAG, "Reading user firstname : "+ user.getDisplayName());
                 }
+
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e("Reading user firstname", databaseError.toException().toString());
+                Log.e(TAG, "Reading user firstname : "+ databaseError.toException().toString());
             }
         });
 
@@ -137,21 +145,27 @@ public class MyAccountConnectedFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 address = dataSnapshot.getValue(String.class);
+
                 if (address!=null) {
                     accountAddress.setText(address);
-                    Log.d("Reading user address", address);
+                    Log.d(TAG, "Reading user address : " +address);
                 }
-                else {
-                    accountAddress.setText("Veillez à modifier votre adresse pour passer une commande");
-
+                else if (getString(R.string.address_missing).equals(address)){
                     accountAddress.setTextColor(Color.RED);
-
+                    Log.d(TAG, "Reading user address : no address was specified");
                 }
+
+                else {
+                    accountAddress.setText(getString(R.string.address_missing));
+                    accountAddress.setTextColor(Color.RED);
+                    Log.d(TAG, "Reading user address : no address was specified");
+                }
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e("Reading user address", databaseError.toException().toString());
+                Log.e(TAG, "Reading user address : " + databaseError.toException().toString());
             }
         });
 
@@ -162,23 +176,32 @@ public class MyAccountConnectedFragment extends Fragment {
                 fidelityPoints = dataSnapshot.getValue(Integer.class);
                 if (fidelityPoints!=null) {
                     accountFidelityPoints.setText(String.valueOf(fidelityPoints));
-                    Log.d("Reading fidelity points", fidelityPoints.toString());
+                    Log.d(TAG, "Reading fidelity points : "+ fidelityPoints.toString());
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e("Reading fidelity points", databaseError.toException().toString());
+                Log.e(TAG, "Reading fidelity points : "+databaseError.toException().toString());
             }
         });
 
+    }
+
+    @Override
+    public void onActivityCreated(final Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        readUserDataFromDatabase();
         accountEmail.setText(user.getEmail());
 
         modifyPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mAuth.sendPasswordResetEmail(user.getEmail());
-                Toast.makeText(getContext(), "Vous allez recevoir un e-mail pour réinitialiser votre mot de passe. Veuillez vous reconnecter", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),
+                        "Vous allez recevoir un e-mail pour réinitialiser votre mot de passe." +
+                                " Veuillez vous reconnecter", Toast.LENGTH_LONG).show();
                 disconnect();
             }
         });
@@ -186,7 +209,6 @@ public class MyAccountConnectedFragment extends Fragment {
         modifyEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
                 alertDialog.setTitle("Modifier l'adresse e-mail");
 
@@ -227,6 +249,8 @@ public class MyAccountConnectedFragment extends Fragment {
                     }
                 });
 
+                alertDialog.show();
+
             }
         });
 
@@ -234,6 +258,7 @@ public class MyAccountConnectedFragment extends Fragment {
         modifyAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
                 alertDialog.setTitle("Modifier l'adresse");
 
@@ -258,10 +283,9 @@ public class MyAccountConnectedFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String newAddress = address.getText().toString().trim();
 
-                        if (TextUtils.isEmpty(newAddress)){
+                        if (TextUtils.isEmpty(newAddress)) {
                             address.setError("Le champ est vide");
-                        }
-                        else{
+                        } else {
 
                             DatabaseReference mDataBase = FirebaseDatabase.getInstance().getReference();
                             mDataBase.child("users").child(mAuth.getCurrentUser().getUid()).child("address").setValue(newAddress);
@@ -270,10 +294,56 @@ public class MyAccountConnectedFragment extends Fragment {
                         }
                     }
                 });
+                alertDialog.show();
+
             }
         });
 
 
+        sponsorship.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (firstname != null && fidelityPoints != null) {
+                    Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invite_title))
+                            .setMessage(getString(R.string.invite_message) + "\n" +
+                                    firstname.substring(0, 3) + fidelityPoints)
+                            .setCustomImage(Uri.parse(getString(R.string.invite_image)))
+                            .build();
+                    startActivityForResult(intent, REQUEST_INVITE);
+                }
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                disconnect();
+            }
+        });
+
+
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "OnActivityResult : requestCode : "+requestCode + " resultCode : "+resultCode);
+
+        if (requestCode == REQUEST_INVITE){
+            if (resultCode == RESULT_OK){
+                String[] ids = AppInviteInvitation.getInvitationIds(resultCode, data);
+                for (String id : ids){
+                    Log.d(TAG, "OnActivityResult : sent invitation : "+id);
+                }
+
+                FirebaseUser user = mAuth.getCurrentUser();
+                mDataBase.child("users").child(user.getUid()).child("fidelityPoints")
+                        .setValue(fidelityPoints + fidelityPointsPerInvite*ids.length);
+
+            }
+        }
     }
 
 

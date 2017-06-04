@@ -101,6 +101,14 @@
                 android:layout_margin="5dp"
                 android:text="@string/buy_product_online"/>
 
+            <Button
+                android:id="@+id/buy_product_with_app_button"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/buy_product_with_app"/>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"

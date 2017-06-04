@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ToBeOrToHave</string>
+    <string name="app_name">MacroGamia</string>
     
     <string name="facebook_app_id">136344220247700</string>
     <string name="fb_login_protocol_scheme">fb136344220247700</string>
@@ -17,10 +17,14 @@
     
     
     <string name="buy_product_online">Acheter le produit en ligne</string>
+    <string name="buy_product_with_app">Acheter le produit via l\'application</string>
+    <string name="payment">Payer</string>
     
     
     <string name="view_stores_having_product">Voir les magasins ayant ce produit en stock</string>
     <string name="store_to_product_button">Voir les produits en stock</string>
+    <string name="view_store_on_map">Voir le magasin sur la carte</string>
+
     
     <string name="connect_to_google">Se connecter au compte Google</string>
     <string name="connect_to_firebase">Se connecter</string>
@@ -31,15 +35,47 @@
     <string name="account_email">Votre courriel : </string>
     <string name="modify_user_email">Modifer le courriel</string>
     <string name="sponsorship">Le parrainage vous permet de gagner des points de fidélité.
-        Les points de fidélité servent à avoir des promotions sur notre sélection de produits.</string>
+        Les points de fidélité servent à avoir des promotions sur notre sélection de produits. Si vous achetez en magasin, il faut présenter une carte de fidélité</string>
     <string name="fidelity_points">Vos points de fidélité actuels</string>
     <string name="sponsorship_button">Parrainer quelqu\'un</string>
     <string name="modify_password">Réinitialiser le mot de passe</string>
     <string name="modify_address">Modifier votre adresse</string>
     <string name="modify_email">Modifier votre courriel</string>
     <string name="password_forgotten">Mot de passe oublié</string>
+    <string name="disconnect">Se déconnecter</string>
+    <string name="address_missing">Pensez à modifier votre addresse pour pouvoir passer commande</string>
+
+
+
+
+    <string name="priceC">Trier par prix croissant</string>
+    <string name="priceD">Trier par prix décroissant</string>
+    <string name="nameC">Trier par nom croissant</string>
+    <string name="nameD">Trier par nom décroissant</string>
+    <string name="defaultSort">Trier par ...</string>
+
+
     
 
     <string name="share_button_title">Partager</string>
+
+    <string name="invite_title">Parrainage</string>
+    <string name="invite_message">Rejoint moi sur l\'application MacroGamia en écrivant le code
+    suivant lors de ton inscription : </string>
+    <string name="invite_image">http://imgur.com/TEywFKe</string>
+
+
+
+
+    <string-array name="sorting_types">
+
+        <item>@string/defaultSort</item>
+        <item>@string/priceC</item>
+        <item>@string/priceD</item>
+        <item>@string/nameC</item>
+        <item>@string/nameD</item>
+
+
+    </string-array>
     
 </resources>

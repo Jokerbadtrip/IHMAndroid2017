@@ -79,10 +79,8 @@ public class MyAccountNotConnectedFragment extends Fragment implements GoogleApi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.my_account_not_connected, container, false);
-        googleButton = (SignInButton) rootView.findViewById(R.id.connect_with_google_button);
-        signInButton = (Button) rootView.findViewById(R.id.connect_with_firebase_button);
-        registerButton = (Button) rootView.findViewById(R.id.register_with_firebase_button);
-        facebookButton = (LoginButton) rootView.findViewById(R.id.connect_with_facebook_button);
+
+        findViewById(rootView);
 
         auth = FirebaseAuth.getInstance();
 
@@ -124,7 +122,14 @@ public class MyAccountNotConnectedFragment extends Fragment implements GoogleApi
         return rootView;
     }
 
+    private void findViewById(View rootView) {
 
+        googleButton = (SignInButton) rootView.findViewById(R.id.connect_with_google_button);
+        signInButton = (Button) rootView.findViewById(R.id.connect_with_firebase_button);
+        registerButton = (Button) rootView.findViewById(R.id.register_with_firebase_button);
+        facebookButton = (LoginButton) rootView.findViewById(R.id.connect_with_facebook_button);
+
+    }
 
 
     @Override

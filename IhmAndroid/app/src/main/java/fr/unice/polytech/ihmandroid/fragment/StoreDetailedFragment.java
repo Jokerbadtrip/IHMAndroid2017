@@ -24,25 +24,21 @@ import fr.unice.polytech.ihmandroid.model.Store;
  * Created by MSI on 05/05/2017.
  */
 
-public class StoreDetailedViewFragment extends Fragment {
+public class StoreDetailedFragment extends Fragment {
 
 
     private List<Product> products;
 
     private ImageView storeImage;
-    private TextView storeName;
-    private TextView storeDescription;
-    private TextView storeAdress;
-    private TextView storeCityNumber;
-    private TextView storeCity;
-    private Button storeToProduct;
+    private TextView storeName, storeDescription, storeAdress, storeCityNumber,storeCity;
+    private Button storeToProduct, storeOnMap;
 
-    public StoreDetailedViewFragment() {
+    public StoreDetailedFragment() {
 
     }
 
     public static Fragment newInstance(){
-        Fragment fragment = new StoreDetailedViewFragment();
+        Fragment fragment = new StoreDetailedFragment();
         return fragment;
     }
 
@@ -64,6 +60,7 @@ public class StoreDetailedViewFragment extends Fragment {
         storeCityNumber = (TextView) view.findViewById(R.id.store_cityNumber_detailed);
         storeCity = (TextView) view.findViewById(R.id.store_city_detailed);
         storeToProduct = (Button) view.findViewById(R.id.store_product_button);
+        storeOnMap = (Button) view.findViewById(R.id.view_store_on_map);
     }
 
 
@@ -97,6 +94,24 @@ public class StoreDetailedViewFragment extends Fragment {
                 bundle.putParcelableArrayList("products", products);
 
                 fragment.setArguments(bundle);
+
+                ft.replace(R.id.content_frame, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
+
+        storeOnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                Fragment fragment = StoreMapFragment.newInstance();
+
+                Bundle bundle1 = new Bundle();
+                bundle1.putParcelable("store", store);
+
+                fragment.setArguments(bundle1);
 
                 ft.replace(R.id.content_frame, fragment);
                 ft.addToBackStack(null);

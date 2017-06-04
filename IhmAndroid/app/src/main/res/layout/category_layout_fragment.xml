@@ -8,10 +8,10 @@
     app:layout_scrollFlags="scroll">
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_categories"
+    <ListView
+        android:id="@+id/list_categories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"></android.support.v7.widget.RecyclerView>
+        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"></ListView>
 
 </RelativeLayout>

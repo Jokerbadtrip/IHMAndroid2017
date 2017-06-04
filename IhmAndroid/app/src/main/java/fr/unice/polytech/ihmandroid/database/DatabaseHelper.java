@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.unice.polytech.ihmandroid.model.Event;
 import fr.unice.polytech.ihmandroid.model.Product;
 import fr.unice.polytech.ihmandroid.model.Store;
 
@@ -23,8 +24,7 @@ import fr.unice.polytech.ihmandroid.model.Store;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private List<Store> stores = new ArrayList<>();
-    private List<Product> products = new ArrayList<>();
+
 
     private static String DB_NAME = "tobeortohave_database.db";
 
@@ -102,13 +102,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    public void buildStores(){
+    public List<Store> buildStores(){
 
 
 
         Cursor cursor =myDataBase.rawQuery("SELECT * FROM store ORDER BY id ", null);
         cursor.moveToFirst();
 
+        List<Store> stores = new ArrayList<>();
 
         while (!cursor.isAfterLast()){
             int id;
@@ -118,6 +119,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String cityNumber;
             String imageURL;
             String description;
+            float lat;
+            float lng;
 
 
             id = cursor.getInt(0);
@@ -127,20 +130,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cityNumber = cursor.getString(4);
             imageURL = cursor.getString(5);
             description = cursor.getString(6);
+            lat = cursor.getFloat(7);
+            lng = cursor.getFloat(8);
 
-            Store store = new Store(id, name, city, adress, cityNumber, imageURL, description);
+
+            Store store = new Store(id, name, city, adress, cityNumber, imageURL, description, lat, lng);
             stores.add(store);
 
 
             cursor.moveToNext();
         }
 
+        return stores;
+
     }
 
-    public void buildProducts(){
+    public ArrayList<Product> buildProducts(){
         Cursor cursor = myDataBase.rawQuery("SELECT * FROM product ORDER BY id", null);
         cursor.moveToFirst();
 
+        ArrayList<Product> products = new ArrayList<>();
 
         while (!cursor.isAfterLast()){
 
@@ -175,10 +184,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.moveToNext();
         }
 
+        return products;
     }
 
 
-    public void buildInventories(){
+    public List<Store> buildInventories(List<Store> stores, List<Product> products){
 
         Cursor cursor = myDataBase.rawQuery("SELECT * FROM inventory", null);
         cursor.moveToFirst();
@@ -208,14 +218,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }
 
-
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public List<Store> getStores(){
         return stores;
+
+
     }
+
+    public List<Event> buildEvents(){
+
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM event ORDER BY name", null);
+        cursor.moveToFirst();
+
+        List<Event> events = new ArrayList<>();
+
+        while (!cursor.isAfterLast()){
+
+            String name,description, date;
+            float lat, lng;
+
+            name = cursor.getString(0);
+            description = cursor.getString(1);
+            lat = cursor.getFloat(2);
+            lng = cursor.getFloat(3);
+
+            Event event = new Event(name, description, lat, lng);
+            events.add(event);
+
+        }
+
+        return events;
+
+    }
+
 }
