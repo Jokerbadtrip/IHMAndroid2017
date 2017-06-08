@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin"
     app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 
 
@@ -14,15 +15,16 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_margin="5dp"
+            android:layout_height="@dimen/view_divider_height"
             android:background="@color/view_divider_color" />
 
         <TextView
             android:text="@string/connected_as"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="3dp"/>
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/text_margin"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,13 +34,16 @@
             <TextView
                 android:id="@+id/account_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/text_margin"/>
 
             <TextView
                 android:id="@+id/account_firstname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="3dp"/>
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/text_margin"/>
 
         </LinearLayout>
 
@@ -46,8 +51,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_margin="5dp"
+            android:layout_height="@dimen/view_divider_height"
             android:background="@color/view_divider_color" />
 
 
@@ -58,12 +62,16 @@
             android:text="@string/account_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="3dp"/>
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/text_margin"/>
 
         <TextView
             android:id="@+id/account_address"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/text_margin"/>
 
 
 
@@ -72,6 +80,10 @@
             android:text="@string/modify_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white_text_background"
+            android:background="@color/colorPrimaryDark"
+            android:layout_margin="@dimen/default_margin"
             android:maxLines="2"/>
 
 
@@ -82,22 +94,25 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_margin="5dp"
+            android:layout_height="@dimen/view_divider_height"
             android:background="@color/view_divider_color" />
 
 
 
         <TextView
             android:text="@string/account_email"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="3dp"/>
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/text_margin"/>
 
         <TextView
             android:id="@+id/account_email"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"/>
 
 
 
@@ -107,59 +122,79 @@
         <Button
             android:id="@+id/modify_email"
             android:text="@string/modify_email"
+            android:layout_gravity="center"
+            android:textColor="@color/white_text_background"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:background="@color/colorPrimaryDark"/>
 
 
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_margin="5dp"
+            android:layout_height="@dimen/view_divider_height"
             android:background="@color/view_divider_color" />
 
         <TextView
             android:text="@string/sponsorship"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/text_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
             android:text="@string/fidelity_points"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/text_margin"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/fidelity_points"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/sponsorship_button"
             android:text="@string/sponsorship_button"
+            android:layout_gravity="center"
+            android:textColor="@color/white_text_background"
+            android:layout_margin="@dimen/default_margin"
+            android:background="@color/colorPrimaryDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_margin="5dp"
+            android:layout_height="@dimen/view_divider_height"
             android:background="@color/view_divider_color" />
 
         <Button
             android:id="@+id/modify_password"
             android:text="@string/modify_password"
+            android:layout_gravity="center"
+            android:textColor="@color/white_text_background"
+            android:layout_margin="@dimen/default_margin"
+            android:background="@color/colorPrimaryDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_margin="5dp"
+            android:layout_height="@dimen/view_divider_height"
             android:background="@color/view_divider_color" />
         
         <Button
             android:id="@+id/logout_button"
             android:text="@string/disconnect"
+            android:textColor="@color/white_text_background"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/default_margin"
+            android:background="@color/colorPrimaryDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

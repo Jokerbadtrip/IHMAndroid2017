@@ -46,7 +46,7 @@ public class PromotedFragment extends Fragment {
         coverFlow = (FeatureCoverFlow) rootView.findViewById(R.id.coverflow);
         DisplayMetrics dm = getActivity().getResources().getDisplayMetrics();
         int h = (int) Math.round(dm.heightPixels*0.60);
-        int w = (int) Math.round(dm.widthPixels*0.80);
+        int w = (int) Math.round(dm.widthPixels*0.65);
 
         coverFlow.setCoverHeight(h);
         coverFlow.setCoverWidth(w);

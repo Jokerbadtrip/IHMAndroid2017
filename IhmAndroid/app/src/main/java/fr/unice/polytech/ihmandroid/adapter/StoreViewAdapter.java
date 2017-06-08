@@ -60,11 +60,16 @@ public class StoreViewAdapter extends ArrayAdapter {
 
     @Override
     public Store getItem(int position){
-        return stores.get(position);
+        return (Store) super.getItem(position);
     }
     @Override
     public int getCount(){
         return super.getCount();
+    }
+
+    public void refreshList(List<Store> newList){
+        stores = newList;
+        notifyDataSetChanged();
     }
 
 

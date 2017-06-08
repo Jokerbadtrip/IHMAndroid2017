@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="5dp"
+    android:layout_margin="@dimen/activity_horizontal_margin"
     app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 
 
@@ -21,22 +21,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_margin="5dp"
-                android:background="@color/view_divider_color" />
-
-            <ImageView
-                android:id="@+id/product_image"
-                android:layout_width="250dp"
-                android:layout_height="300dp"
-                android:layout_gravity="center"
-                android:scaleType="fitXY"
-                android:padding="15dp"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_margin="5dp"
+                android:layout_height="@dimen/view_divider_height"
                 android:background="@color/view_divider_color" />
 
             <TextView
@@ -44,12 +29,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="5dp"/>
+                android:layout_margin="@dimen/text_margin"
+                android:textStyle="bold"
+                android:textSize= "@dimen/title_text_size"/>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_margin="5dp"
+                android:layout_height="@dimen/view_divider_height"
+                android:background="@color/view_divider_color" />
+
+            <ImageView
+                android:id="@+id/product_image"
+                android:layout_width="@dimen/product_image_width"
+                android:layout_height="@dimen/product_image_height"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                android:layout_margin="@dimen/default_margin"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_divider_height"
                 android:background="@color/view_divider_color" />
 
             <TextView
@@ -57,12 +57,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="5dp"/>
+                android:layout_margin="@dimen/text_margin"/>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_margin="5dp"
+                android:layout_height="@dimen/view_divider_height"
                 android:background="@color/view_divider_color" />
 
             <TextView
@@ -70,12 +69,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="5dp"/>
+                android:layout_margin="@dimen/text_margin"/>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_margin="5dp"
+                android:layout_height="@dimen/view_divider_height"
                 android:background="@color/view_divider_color" />
 
 
@@ -85,12 +83,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="30dp"/>
+                android:layout_margin="@dimen/text_margin"/>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_margin="5dp"
+                android:layout_height="@dimen/view_divider_height"
                 android:background="@color/view_divider_color" />
 
             <Button
@@ -98,21 +95,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:text="@string/buy_product_online"/>
-
-            <Button
-                android:id="@+id/buy_product_with_app_button"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/buy_product_with_app"/>
+                android:layout_margin="@dimen/default_margin"
+                android:text="@string/buy_product_online"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/white_text_background"/>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_margin="5dp"
+                android:layout_height="@dimen/view_divider_height"
                 android:background="@color/view_divider_color" />
 
             <Button
@@ -120,13 +110,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:text="@string/view_stores_having_product"/>
+                android:layout_margin="@dimen/default_margin"
+                android:text="@string/view_stores_having_product"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/white_text_background"/>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_margin="5dp"
+                android:layout_height="@dimen/view_divider_height"
                 android:background="@color/view_divider_color" />
 
             <Button
@@ -134,7 +125,10 @@
                 android:text="@string/share_button_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/white_text_background"/>
 
 
 

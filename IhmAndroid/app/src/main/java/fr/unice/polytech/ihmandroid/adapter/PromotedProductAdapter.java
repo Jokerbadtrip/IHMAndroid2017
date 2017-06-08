@@ -72,12 +72,14 @@ public class PromotedProductAdapter extends BaseAdapter {
         ImageView productImage = (ImageView) view.findViewById(R.id.promoted_product_image);
         TextView productName = (TextView) view.findViewById(R.id.promoted_product_name);
         TextView productPrice = (TextView) view.findViewById(R.id.promoted_product_price);
+        TextView productDescription = (TextView) view.findViewById(R.id.promoted_product_description);
         LinearLayout layout = (LinearLayout) view.findViewById(R.id.layout);
 
 
 
         productName.setText(products.get(position).getName());
         productPrice.setText(String.valueOf(products.get(position).getPrice())+"€");
+        productDescription.setText(products.get(position).getDescription());
         Glide.with(activity)
                 .load(products.get(position).getImage())
                 .placeholder(R.drawable.store_placeholder)

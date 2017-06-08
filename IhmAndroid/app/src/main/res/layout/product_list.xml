@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin"
     app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 
     <Spinner
@@ -13,14 +14,15 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_margin="5dp"
+        android:layout_height="@dimen/view_divider_height"
         android:background="@color/view_divider_color" />
 
 
     <ListView
         android:id="@+id/inventory_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="match_parent"
+        android:divider="@color/view_divider_color"
+        android:dividerHeight="@dimen/view_divider_height"></ListView>
 
 </LinearLayout>

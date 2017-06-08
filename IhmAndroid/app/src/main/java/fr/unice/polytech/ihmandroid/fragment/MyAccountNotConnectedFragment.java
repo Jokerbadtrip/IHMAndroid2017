@@ -1,15 +1,21 @@
 package fr.unice.polytech.ihmandroid.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
@@ -54,12 +60,15 @@ public class MyAccountNotConnectedFragment extends Fragment implements GoogleApi
 
     private SignInButton googleButton;
     private Button registerButton;
-    private Button signInButton;
+    private Button signInButton, passwordForgotten;
     private LoginButton facebookButton;
     private CallbackManager mCallbackManager;
+    private EditText email, password;
+    private ProgressBar progressBar;
 
 
     private FirebaseAuth auth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     private GoogleApiClient mGoogleApiClient;
     private final int RC_SIGN_IN = 9001;
 
@@ -83,6 +92,21 @@ public class MyAccountNotConnectedFragment extends Fragment implements GoogleApi
         findViewById(rootView);
 
         auth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                if (user != null){
+                    Log.d("Account : ", "user is connected");
+
+                }
+                else {
+
+                    Log.d("Account :", "user is disconnected");
+                }
+            }
+        };
 
         facebookButton.setFragment(this);
         facebookButton.setReadPermissions("email", "public_profile");
@@ -91,6 +115,7 @@ public class MyAccountNotConnectedFragment extends Fragment implements GoogleApi
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess : "+loginResult);
+                progressBar.setVisibility(View.VISIBLE);
                 firebaseAuthWithFacebook(loginResult.getAccessToken());
             }
 
@@ -125,9 +150,13 @@ public class MyAccountNotConnectedFragment extends Fragment implements GoogleApi
     private void findViewById(View rootView) {
 
         googleButton = (SignInButton) rootView.findViewById(R.id.connect_with_google_button);
-        signInButton = (Button) rootView.findViewById(R.id.connect_with_firebase_button);
         registerButton = (Button) rootView.findViewById(R.id.register_with_firebase_button);
         facebookButton = (LoginButton) rootView.findViewById(R.id.connect_with_facebook_button);
+        signInButton = (Button) rootView.findViewById(R.id.connect_button);
+        email = (EditText) rootView.findViewById(R.id.account_email);
+        password = (EditText) rootView.findViewById(R.id.user_password);
+        progressBar = (ProgressBar) rootView.findViewById(R.id.sign_in_progress_bar);
+        passwordForgotten = (Button) rootView.findViewById(R.id.password_forgotten);
 
     }
 
@@ -155,16 +184,99 @@ public class MyAccountNotConnectedFragment extends Fragment implements GoogleApi
             }
         });
 
+        passwordForgotten.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                alertDialog.setTitle("Mot de passe oublié");
+                final EditText email = new EditText(getContext());
+                email.setHint("Courriel");
+
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+
+                email.setLayoutParams(lp);
+                alertDialog.setView(email);
+
+                alertDialog.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                alertDialog.setPositiveButton("Réinitialiser le mot de passe", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String newEmail = email.getText().toString().trim();
+
+                        if (TextUtils.isEmpty(newEmail)){
+                            email.setError("Le champ est vide");
+                        }
+                        else{
+                            auth.sendPasswordResetEmail(newEmail);
+                            dialog.cancel();
+                        }
+                    }
+                });
+
+                alertDialog.show();
+
+            }
+        });
+
 
     }
 
     private void signInWithFirebase(){
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        Fragment fragment = SignInWithFireBaseFragment.newInstance();
-        ft.replace(R.id.content_frame, fragment);
-        ft.addToBackStack(null);
-        ft.commit();
+        progressBar.setVisibility(View.VISIBLE);
+        String email = this.email.getText().toString().trim();
+        String password = this.password.getText().toString().trim();
+
+        if (TextUtils.isEmpty(email)){
+            this.email.setError("Champ requis");
+            return;
+        }else{
+            this.email.setError(null);
+        }
+
+        if (TextUtils.isEmpty(password)){
+            this.password.setError("Champ requis");
+        }else {
+            this.password.setError(null);
+        }
+
+        auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this.getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+
+                        progressBar.setVisibility(View.GONE);
+
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "signInWithEmail:failed", task.getException());
+                            Toast.makeText(getContext(), R.string.connection_failed,
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            FragmentTransaction ft = getFragmentManager().beginTransaction();
+                            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                            Fragment fragment = MyAccountConnectedFragment.newInstance();
+                            ft.replace(R.id.content_frame, fragment);
+                            ft.addToBackStack(null);
+                            ft.commit();
+                        }
+
+                        // ...
+                    }
+                });
+
     }
 
 
@@ -178,6 +290,7 @@ public class MyAccountNotConnectedFragment extends Fragment implements GoogleApi
     }
 
     private void signInWithGoogle(){
+        progressBar.setVisibility(View.VISIBLE);
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent,RC_SIGN_IN);
 
@@ -193,6 +306,9 @@ public class MyAccountNotConnectedFragment extends Fragment implements GoogleApi
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 Log.d(TAG, "facebook:onComplete : " + task.isSuccessful());
+
+                progressBar.setVisibility(View.GONE);
+
                 if (!task.isSuccessful()){
                     Toast.makeText(getContext(), R.string.connection_failed,
                             Toast.LENGTH_SHORT).show();
@@ -235,6 +351,8 @@ public class MyAccountNotConnectedFragment extends Fragment implements GoogleApi
         auth.signInWithCredential(credential).addOnCompleteListener(this.getActivity(), new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
+                progressBar.setVisibility(View.GONE);
 
                 if (!task.isSuccessful()){
                     Log.w(TAG, "signInWithEmail:failed", task.getException());
@@ -321,5 +439,19 @@ public class MyAccountNotConnectedFragment extends Fragment implements GoogleApi
 
         mGoogleApiClient.stopAutoManage(getActivity());
         mGoogleApiClient.disconnect();
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        auth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        if (mAuthListener != null){
+            auth.removeAuthStateListener(mAuthListener);
+        }
     }
 }

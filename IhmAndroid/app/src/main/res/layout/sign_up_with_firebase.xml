@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/activity_horizontal_margin"
     app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 
 
@@ -14,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
-        android:padding="5dp"
         android:layout_gravity="top|center_horizontal">
 
         <android.support.design.widget.TextInputLayout
@@ -29,9 +29,10 @@
                 android:ems="10"
                 android:maxLines="1"
                 android:inputType="textPersonName"
-                android:hint="Nom"
+                android:hint="@string/firstname_hint"
                 android:layout_gravity="center_horizontal"
-                android:paddingTop="0dp"/>
+                android:paddingTop="0dp"
+                android:textColorHint="@color/colorPrimaryDark"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -46,9 +47,10 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:hint="Prénom"
+                android:hint="@string/name_hint"
                 android:layout_gravity="center_horizontal"
-                android:paddingTop="0dp"/>
+                android:paddingTop="0dp"
+                android:textColorHint="@color/colorPrimaryDark"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -66,9 +68,10 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textPostalAddress"
-                android:hint="Adresse postale"
+                android:hint="@string/address_hint"
                 android:layout_gravity="center_horizontal"
-                android:paddingTop="0dp"/>
+                android:paddingTop="0dp"
+                android:textColorHint="@color/colorPrimaryDark"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -86,9 +89,10 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textEmailAddress"
-                android:hint="Courriel"
+                android:hint="@string/email_hint"
                 android:layout_gravity="center_horizontal"
-                android:paddingTop="0dp"/>
+                android:paddingTop="0dp"
+                android:textColorHint="@color/colorPrimaryDark"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -106,9 +110,10 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textPassword"
-                android:hint="Mot de passe"
+                android:hint="@string/password_hint"
                 android:layout_gravity="center_horizontal"
-                android:paddingTop="0dp"/>
+                android:paddingTop="0dp"
+                android:textColorHint="@color/colorPrimaryDark"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -126,7 +131,10 @@
                 android:id="@+id/confirm_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"/>
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/white_text_background"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/default_margin"/>
 
 
             <Button
@@ -134,7 +142,10 @@
                 android:id="@+id/reset_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"/>
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/white_text_background"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/default_margin"/>
 
 
         </LinearLayout>
@@ -142,10 +153,10 @@
 
         <ProgressBar
             android:id="@+id/sign_up_progress_bar"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/progressbar_width"
+            android:layout_height="@dimen/progressbar_height"
             android:layout_gravity="center|bottom"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="@dimen/default_margin"
             android:visibility="gone"/>
 
 

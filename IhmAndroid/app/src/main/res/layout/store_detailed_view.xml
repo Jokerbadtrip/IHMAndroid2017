@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin"
     app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 
     <ScrollView
@@ -17,35 +18,23 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_margin="5dp"
+                android:layout_height="@dimen/view_divider_height"
                 android:background="@color/view_divider_color" />
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp">
+                android:layout_height="wrap_content">
 
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:background="@color/view_divider_color" />
 
                 <ImageView
                     android:id="@+id/store_image_detailed"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:padding="5dp"
+                    android:layout_width="@dimen/store_image_width"
+                    android:layout_height="@dimen/store_image_height"
+                    android:layout_margin="@dimen/default_margin"
                     android:layout_gravity="center"
                     android:scaleType="fitXY"/>
 
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:background="@color/view_divider_color" />
 
                 <TextView
                     android:id="@+id/store_name_detailed"
@@ -53,8 +42,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textAlignment="center"
-                    android:padding="5dp"
-                    android:paddingLeft="50dp"/>
+                    android:layout_margin="@dimen/text_margin"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/title_text_size"/>
 
 
 
@@ -63,13 +53,11 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_margin="5dp"
+                android:layout_height="@dimen/view_divider_height"
                 android:background="@color/view_divider_color" />
 
             <LinearLayout
                 android:orientation="vertical"
-                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -87,7 +75,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
-                            android:padding="5dp"/>
+                            android:layout_margin="@dimen/text_margin"/>
 
                     </LinearLayout>
                 </ScrollView>
@@ -98,18 +86,17 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_margin="5dp"
+                    android:layout_height="@dimen/view_divider_height"
                     android:background="@color/view_divider_color" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Adresse :"
+                    android:text="@string/store_address"
                     android:textAlignment="center"
-                    android:textSize="20dp"
-                    android:padding="5dp"/>
+                    android:layout_margin="@dimen/text_margin"
+                    android:textStyle="bold"/>
 
 
 
@@ -150,8 +137,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_margin="5dp"
+                    android:layout_height="@dimen/view_divider_height"
                     android:background="@color/view_divider_color" />
 
                 <Button
@@ -159,21 +145,27 @@
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/store_to_product_button"/>
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/white_text_background"
+                    android:text="@string/store_to_product_button"
+                    android:layout_margin="@dimen/default_margin"/>
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_margin="5dp"
+                android:layout_height="@dimen/view_divider_height"
                 android:background="@color/view_divider_color" />
 
             <Button
                 android:id="@+id/view_store_on_map"
                 android:text="@string/view_store_on_map"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/white_text_background"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin"/>
 
         </LinearLayout>
     </ScrollView>

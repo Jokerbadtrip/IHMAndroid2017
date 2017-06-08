@@ -19,8 +19,8 @@ import java.util.List;
 import fr.unice.polytech.ihmandroid.R;
 import fr.unice.polytech.ihmandroid.adapter.ProductListAdapter;
 import fr.unice.polytech.ihmandroid.model.Product;
-import fr.unice.polytech.ihmandroid.sorting.SortByName;
-import fr.unice.polytech.ihmandroid.sorting.SortByPrice;
+import fr.unice.polytech.ihmandroid.sorting.SortProductByName;
+import fr.unice.polytech.ihmandroid.sorting.SortProductByPrice;
 
 /**
  * Created by MSI on 08/05/2017.
@@ -84,8 +84,8 @@ public class ProductListFragment extends Fragment {
             }
         });
 
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getContext(), R.array.sorting_types, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getContext(), R.array.sorting_product, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sorting.setAdapter(spinnerAdapter);
 
         sorting.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -101,23 +101,23 @@ public class ProductListFragment extends Fragment {
                 if (sortingType.equals(getString(R.string.priceC))){
 
                     Log.d(TAG, "sorting by price ascending");
-                    newList = SortByPrice.sort(products);
+                    newList = SortProductByPrice.sort(products);
                 }
                 if (sortingType.equals(getString(R.string.priceD))){
 
                     Log.d(TAG, "sorting by price descending");
-                    newList = SortByPrice.sort(products);
+                    newList = SortProductByPrice.sort(products);
                     Collections.reverse(products);
                 }
                 if (sortingType.equals(getString(R.string.nameC))){
 
                     Log.d(TAG, "sorting by names ascending");
-                    newList = SortByName.sort(products);
+                    newList = SortProductByName.sort(products);
                 }
                 if (sortingType.equals(getString(R.string.nameD))){
 
                     Log.d(TAG, "sorting by names descending");
-                    newList = SortByName.sort(products);
+                    newList = SortProductByName.sort(products);
                     Collections.reverse(products);
                 }
                 if (sortingType.equals(getString(R.string.defaultSort))){

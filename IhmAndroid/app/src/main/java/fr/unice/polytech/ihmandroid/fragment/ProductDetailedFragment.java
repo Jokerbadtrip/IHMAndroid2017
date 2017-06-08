@@ -71,7 +71,6 @@ public class ProductDetailedFragment extends Fragment {
         buyOnline = (Button) view.findViewById(R.id.buy_product_online_button);
         viewStores = (Button) view.findViewById(R.id.view_stores_having_product_button);
         shareButton = (Button) view.findViewById(R.id.share_button);
-        buyWithApp = (Button) view.findViewById(R.id.buy_product_with_app_button);
 
     }
 

@@ -4,35 +4,122 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin"
     app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/account_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:hint="@string/email_hint"
+                android:textColorHint="@color/colorPrimary"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/text_margin"/>
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/user_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:hint="@string/password_hint"
+                android:textColorHint="@color/colorPrimary"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/text_margin"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
+        <ProgressBar
+            android:id="@+id/sign_in_progress_bar"
+            android:layout_width="@dimen/progressbar_width"
+            android:layout_height="@dimen/progressbar_height"
+            android:layout_gravity="center|bottom"
+            android:layout_margin="@dimen/default_margin"
+            android:visibility="gone"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/connect_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/connect_to_firebase"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/white_text_background"
+                android:layout_margin="@dimen/default_margin"/>
+
+            <Button
+                android:text="@string/register_to_firebase"
+                android:id="@+id/register_with_firebase_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/white_text_background"
+                android:layout_margin="@dimen/default_margin"/>
+
+            <Button
+                android:id="@+id/password_forgotten"
+                android:text="@string/password_forgotten"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/white_text_background"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
     <com.google.android.gms.common.SignInButton
-        android:title="@string/connect_to_google"
+        android:title="@string/common_signin_button_text_long"
         android:id="@+id/connect_with_google_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:background="@color/colorPrimaryDark"
+        android:layout_margin="@dimen/default_margin"/>
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/connect_with_facebook_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/default_margin"/>
 
-    <Button
-        android:text="@string/connect_to_firebase"
-        android:id="@+id/connect_with_firebase_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
 
-    <Button
-        android:text="@string/register_to_firebase"
-        android:id="@+id/register_with_firebase_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+
+
 
 
 

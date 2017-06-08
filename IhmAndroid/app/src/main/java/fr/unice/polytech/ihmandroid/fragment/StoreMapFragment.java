@@ -40,7 +40,7 @@ public class StoreMapFragment extends Fragment implements OnMapReadyCallback{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.map_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.store_map_fragment, container, false);
         findViewById(rootView);
         map.onCreate(savedInstanceState);
         map.getMapAsync(this);

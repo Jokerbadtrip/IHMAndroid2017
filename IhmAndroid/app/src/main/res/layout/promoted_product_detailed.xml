@@ -4,90 +4,93 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin"
     app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 
 
-        <ScrollView
-            android:id="@+id/scroll_view"
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layout"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
+            android:layout_height="@dimen/view_divider_height"
+            android:background="@color/view_divider_color" />
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/layout"
-                android:orientation="vertical"
-                android:layout_gravity="top">
+        <TextView
+            android:id="@+id/promoted_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_divider_height"
+            android:background="@color/view_divider_color" />
+
+        <ImageView
+            android:id="@+id/promoted_product_image"
+            android:layout_width="@dimen/product_list_image_width"
+            android:layout_height="@dimen/product_list_image_height"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/default_margin"
+            android:scaleType="fitXY"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_divider_height"
+            android:background="@color/view_divider_color"/>
 
 
+        <TextView
+            android:id="@+id/promoted_product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:gravity="center"/>
 
-                <TextView
-                    android:id="@+id/promoted_product_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_margin="5dp"
-                    android:background="@color/view_divider_color" />
-
-                <ImageView
-                    android:id="@+id/promoted_product_image"
-                    android:layout_width="150dp"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center"
-                    android:scaleType="fitXY"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_margin="5dp"
-                    android:background="@color/view_divider_color"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_divider_height"
+            android:background="@color/view_divider_color"/>
 
 
-                <TextView
-                    android:id="@+id/promoted_product_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_margin="5dp"
-                    android:background="@color/view_divider_color"/>
+            <TextView
+                android:id="@+id/promoted_product_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:layout_gravity="center"
+                android:maxLines="2"/>
 
-                <ScrollView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+        </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/promoted_product_description"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"/>
 
-                    </LinearLayout>
-                </ScrollView>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_divider_height"
+            android:background="@color/view_divider_color" />
 
 
 
 
-
-
-            </LinearLayout>
-
-
-
-        </ScrollView>
+    </LinearLayout>
 
 
 

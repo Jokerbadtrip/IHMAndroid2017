@@ -45,11 +45,9 @@ public class EventAdapter extends ArrayAdapter {
 
         name = (TextView) view.findViewById(R.id.event_name);
         description = (TextView) view.findViewById(R.id.event_description);
-        date = (TextView) view.findViewById(R.id.event_date);
 
         name.setText(getItem(position).getName());
         description.setText(getItem(position).getDescription());
-        //date.setText(getItem(position).getDate());
 
         return view;
 

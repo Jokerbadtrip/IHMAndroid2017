@@ -14,10 +14,12 @@
     <string name="navigation_communicate">Communiquer</string>
     <string name="navigation_share">Partager</string>
     <string name="navigation_send">Envoyer</string>
+
+    <string name="categories">Sélectionnez une catégorie : </string>
+    <string name="events">Sélectionnez un évènement : </string>
     
     
     <string name="buy_product_online">Acheter le produit en ligne</string>
-    <string name="buy_product_with_app">Acheter le produit via l\'application</string>
     <string name="payment">Payer</string>
     
     
@@ -46,16 +48,14 @@
     <string name="address_missing">Pensez à modifier votre addresse pour pouvoir passer commande</string>
 
 
+    <string name="firstname_hint">Nom</string>
+    <string name="name_hint">Prénom</string>
+    <string name="address_hint">Adresse postale</string>
+    <string name="email_hint">Courriel</string>
+    <string name="password_hint">Mot de passe</string>
 
 
-    <string name="priceC">Trier par prix croissant</string>
-    <string name="priceD">Trier par prix décroissant</string>
-    <string name="nameC">Trier par nom croissant</string>
-    <string name="nameD">Trier par nom décroissant</string>
-    <string name="defaultSort">Trier par ...</string>
-
-
-    
+    <string name="store_address">Adresse du magasin : </string>
 
     <string name="share_button_title">Partager</string>
 
@@ -65,9 +65,23 @@
     <string name="invite_image">http://imgur.com/TEywFKe</string>
 
 
+    <string name="priceC">Trier par prix croissant</string>
+    <string name="priceD">Trier par prix décroissant</string>
+    <string name="nameC">Trier par nom croissant</string>
+    <string name="nameD">Trier par nom décroissant</string>
+    <string name="cityC">Trier par nom de ville croissant</string>
+    <string name="cityD">Trier par nom de ville décroissant</string>
+    <string name="defaultSort">Trier par ...</string>
 
 
-    <string-array name="sorting_types">
+    
+
+
+
+
+
+
+    <string-array name="sorting_product">
 
         <item>@string/defaultSort</item>
         <item>@string/priceC</item>
@@ -77,5 +91,19 @@
 
 
     </string-array>
+
+    <string-array name="sorting_store">
+
+        <item>@string/defaultSort</item>
+        <item>@string/nameC</item>
+        <item>@string/nameD</item>
+        <item>@string/cityC</item>
+        <item>@string/cityD</item>
+
+    </string-array>
+
+
+
+
     
 </resources>

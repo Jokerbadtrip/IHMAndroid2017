@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin"
     app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 
 
@@ -13,51 +14,45 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="15dp"
         android:layout_gravity="center">
 
 
         <ImageView
             android:id="@+id/store_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:padding="5dp"/>
+            android:layout_width="@dimen/store_image_width"
+            android:layout_height="@dimen/store_image_height"
+            android:layout_margin="@dimen/default_margin"/>
 
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:background="@color/view_divider_color" />
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp">
+            android:layout_gravity="center">
 
 
             <TextView
                 android:id="@+id/store_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="1dp"
                 android:layout_gravity="center"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:layout_margin="@dimen/text_margin"
+                android:textStyle="bold"
+                android:textSize="@dimen/title_text_size"/>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_margin="5dp"
+                android:layout_height="@dimen/view_divider_height"
                 android:background="@color/view_divider_color" />
 
             <TextView
                 android:id="@+id/store_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="1dp"
                 android:layout_gravity="center"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:layout_margin="@dimen/text_margin"/>
 
 
         </LinearLayout>
